@@ -14,14 +14,14 @@ require 'ensureUserLoggedIn.php';
 if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
-$id = $_GET['id'];
+$dealId = $_GET['id'];
 
 $connection = Connection::getInstance();
-$dealGateway = new WardTableGateway($connection);
+$dealGateway = new DealTableGateway($connection);
 $businessGateway = new BusinessTableGateway($connection);
 
-$deals = $dealGateway->getWardById($id);
-$businesses = $businessGateway->getBusinesssByWardId($id);
+$deals = $dealGateway->getDealById($dealId);
+$businesses = $businessGateway->getBusinessById($bId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -81,7 +81,7 @@ $businesses = $businessGateway->getBusinesssByWardId($id);
 
                 <div class = "options col-md-3 col-xs-6">
                     <center>
-                        <a href="viewWards.php"><img src="img/deal1.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/deal1.png" alt="" class="img-responsive"></a>
                         <h4>Wards</h4>
                     </center>
                 </div>
@@ -107,13 +107,21 @@ $businesses = $businessGateway->getBusinesssByWardId($id);
                     <?php
                     $deal = $deals->fetch(PDO::FETCH_ASSOC);
                     echo '<tr>';
-                    echo '<td>Deal Name</td>'
+                    echo '<td>Deal</td>'
                     . '<td>' . $deal['deal_description'] . '</td>';
+                    echo '</tr>';
+                    echo '<tr>';
+                    echo '<td>Category</td>'
+                    . '<td>' . $deal['deal_category'] . '</td>';
+                    echo '</tr>';
+                    echo '<tr>';
+                    echo '<td>Category</td>'
+                    . '<td>' . $deal['business_name'] . '</td>';
                     echo '</tr>';
                     echo '<th>Options</th>'
                     . '<td>'
-                    . '<a class="btn btn-edit btn-xs" href="editWardForm.php?id=' . $deal['dealID'] . '">Edit</a> '
-                    . '<a class="deleteWard" href="deleteWard.php?id=' . $deal['dealID'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
+                    . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $deal['dealId'] . '">Edit</a> '
+                    . '<a class="deleteDeal" href="deleteWard.php?id=' . $deal['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
                     . '</td>';
                     echo'</tr>';
                     ?>
@@ -126,7 +134,7 @@ $businesses = $businessGateway->getBusinesssByWardId($id);
                 <div class="tour col-lg-12">
                     <h1>Businesses assigned to <?php echo $deal['deal_description']; ?></h1>
                 </div>
-                <?php if ($businesss->rowCount() !== 0) { ?>
+                <?php if ($businesses->rowCount() !== 0) { ?>
                     <table class="table table-bordered table-responsive">
                         <thead>
                             <tr>

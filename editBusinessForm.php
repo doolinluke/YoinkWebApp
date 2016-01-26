@@ -14,7 +14,7 @@ require 'ensureUserLoggedIn.php';
 if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
-$id = $_GET['id'];
+$businessID = $_GET['id'];
 
 $connection = Connection::getInstance();
 $gateway = new BusinessTableGateway($connection);
@@ -23,7 +23,7 @@ $dealGateway = new DealTableGateway($connection);
 
 $deals = $dealGateway->getDeals();
 
-$statement = $gateway->getBusinessById($id);
+$statement = $gateway->getBusinessById($businessID);
 if ($statement->rowCount() !== 1) {
     die("Illegal request");
 }
@@ -111,11 +111,11 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
 
         <div class="container">
             <form id="editBusinessForm" name="editBusinessForm" action="editBusiness.php" method="POST">
-                <input type="hidden" name="businessID" value="<?php echo $id; ?>" />
+                <input type="hidden" name="businessID" value="<?php echo $businessID; ?>" />
                 <table class="table table-bordered table-responsive">
                     <tbody>
                         <tr>
-                            <td>First Name</td>
+                            <td>Business Name</td>
                             <td>
                                 <input type="text" name="business_name" value="<?php
                                 if (isset($_POST) && isset($_POST['business_name'])) {
@@ -133,7 +133,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </td>
                         </tr>
                         <tr>
-                            <td>First Name</td>
+                            <td>Address</td>
                             <td>
                                 <input type="text" name="business_address" value="<?php
                                 if (isset($_POST) && isset($_POST['business_address'])) {
@@ -151,7 +151,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </td>
                         </tr>
                         <tr>
-                            <td>Second Name</td>
+                            <td>Latitude</td>
                             <td>
                                 <input type="text" name="business_lat" value="<?php
                                 if (isset($_POST) && isset($_POST['business_lat'])) {
@@ -169,7 +169,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </td>
                         </tr>
                         <tr>
-                            <td>Address</td>
+                            <td>Longitude</td>
                             <td>
                                 <input type="text" name="business_long" value="<?php
                                 if (isset($_POST) && isset($_POST['business_long'])) {
@@ -187,7 +187,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </td>
                         </tr>
                         <tr>
-                            <td>Phone Number</td>
+                            <td>Business Type</td>
                             <td>
                                 <input type="text" name="business_type" value="<?php
                                 if (isset($_POST) && isset($_POST['business_type'])) {
@@ -204,21 +204,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                                 </span>
                             </td>
                         </tr>
-                        <tr>
-                            <td>Deal</td>
-                            <td>
-                                <select name="dealID">
-                                    <option value="-1">No Deal</option>
-                                    <?php
-                                    $d = $deals->fetch(PDO::FETCH_ASSOC);
-                                    while ($d) {
-                                        echo '<option value="' . $d['dealID'] . '">' . $dD['deal_description'] . '</option>';
-                                        $w = $deals->fetch(PDO::FETCH_ASSOC);
-                                    }
-                                    ?>
-                            </td>
-                        </tr>
-                        <tr>
                         <tr>
                             <td></td>
                             <td>
@@ -270,7 +255,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            $('a.btn-info').tooltip()
+            $('a.btn-info').tooltip();
         </script>
     </body>
 </html>

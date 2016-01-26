@@ -105,7 +105,7 @@ $deals = $dealGateway->getDeals();
                 <table class="table table-bordered">                
                     <tbody>
                         <tr>
-                            <td>Deal Name</td>
+                            <td>Deal Description</td>
                             <td>
                                 <input type="text" name="deal_description" value="<?php
                                 if (isset($_POST) && isset($_POST['deal_description'])) {
@@ -121,9 +121,40 @@ $deals = $dealGateway->getDeals();
                                 </span>
                             </td>
                         </tr>
+                        <tr>
+                            <td>Deal Category</td>
+                            <td>
+                                <input type="text" name="deal_category" value="<?php
+                                if (isset($_POST) && isset($_POST['deal_category'])) {
+                                    echo $_POST['deal_category'];
+                                }
+                                ?>" />
+                                <span id="dealNameError" class="error">
+                                    <?php
+                                    if (isset($errorMessage) && isset($errorMessage['dealNameError'])) {
+                                        echo $errorMessage['dealNameError'];
+                                    }
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Business</td>
+                            <td>
+                                <select name="businessID">
+                                    <option value="-1">No Business</option>
+                                    <?php
+                                    $b = $businessID->fetch(PDO::FETCH_ASSOC);
+                                    while ($b) {
+                                        echo '<option value="' . $b['businessID'] . '">' . $b['business_name'] . '</option>';
+                                        $b = $businesses->fetch(PDO::FETCH_ASSOC);
+                                    }
+                                    ?>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-create" value="Submit">
+                <input type="submit" class="btn btn-info" value="Submit">
             </div>
         </form>
 

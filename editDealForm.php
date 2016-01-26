@@ -128,6 +128,42 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </td>
                         </tr>
                         <tr>
+                            <td>Deal Name</td>
+                            <td>
+                                <input type="text" name="deal_category" value="<?php
+                                if (isset($_POST) && isset($_POST['deal_description'])) {
+                                    echo $_POST['deal_description'];
+                                } else
+                                    echo $row['deal_description']
+                                    ?>" />
+                                <span id="dealNameError" class="error">
+                                    <?php
+                                    if (isset($errorMessage) && isset($errorMessage['deal_description'])) {
+                                        echo $errorMessage['deal_description'];
+                                    }
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Deal Name</td>
+                            <td>
+                                <input type="text" name="business_name" value="<?php
+                                if (isset($_POST) && isset($_POST['business_name'])) {
+                                    echo $_POST['business_name'];
+                                } else
+                                    echo $row['business_name']
+                                    ?>" />
+                                <span id="dealNameError" class="error">
+                                    <?php
+                                    if (isset($errorMessage) && isset($errorMessage['business_name'])) {
+                                        echo $errorMessage['business_name'];
+                                    }
+                                    ?>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
                             <td></td>
                             <td>
                                 <input type="submit" value="Update Deal" name="updateDeal" />

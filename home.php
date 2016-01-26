@@ -101,7 +101,7 @@ if (!isset($_SESSION['events'])) {
         }
         ?>
 
-        <!--<div class = "row">
+        <div class = "row">
             <div class="container">
                 <div class = "options col-md-3 col-xs-6">
                     <center>
@@ -192,7 +192,7 @@ if (!isset($_SESSION['events'])) {
                             ?>
                         </tbody>
                     </table>
-                </div>-->
+                </div>
 
                 <div class="row">
                     <div class="createButton">

@@ -36,7 +36,7 @@ class BusinessTableGateway {
     
     public function getBusinesses($sortOrder, $filterName) {
         // execute a query to get all businesss and sort by first name and to display the ward name instead of wardId by using a join where wardId in businesss = wardId in ward
-        $sqlQuery = "SELECT * FROM Business WHERE 1". 
+        $sqlQuery = "SELECT * FROM Business " . 
                     " ORDER BY " . $sortOrder;
 
         $statement = $this->connection->prepare($sqlQuery);
@@ -77,13 +77,13 @@ class BusinessTableGateway {
         return $statement;
     }
 
-    /*public function getBusinessById($businessID) {
+    public function getBusinessById($bId) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM business WHERE businessID = :businessID";
+        $sqlQuery = "SELECT * FROM business WHERE businessID = :id";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "businessID" => $businessID
+            "id" => $bId
         );
 
         $status = $statement->execute($params);
@@ -93,7 +93,7 @@ class BusinessTableGateway {
         }
 
         return $statement;
-    }*/
+    }
 
     public function insertBusiness($bN, $bA, $bL, $bLg, $bT) {
         $sqlQuery = "INSERT INTO business " .
@@ -110,7 +110,7 @@ class BusinessTableGateway {
             "business_address" => $bA,
             "business_lat" => $bL,
             "business_long" => $bLg,
-            "business_type" => $bT,
+            "business_type" => $bT
         );
         echo '<pre>';
         print_r($sqlQuery);
@@ -146,14 +146,14 @@ class BusinessTableGateway {
         return ($statement->rowCount() == 1);
     }
 
-    public function updateBusiness($bN, $bA, $bLt, $bLg, $bT) {
+    public function updateBusiness($bId, $bN, $bA, $bLt, $bLg, $bT) {
         $sqlQuery = "UPDATE business SET " .
                 "business_name = :business_name, " .
                 "business_address = :business_address, " .
                 "business_lat = :business_lat, " .
                 "business_long = :business_long, " .
-                "business_type = :business_type, " .
-                "WHERE businessId = :businessId";
+                "business_type = :business_type " .
+                " WHERE businessID = :businessID";
 
         echo '<pre>';
         print_r($sqlQuery);
@@ -161,13 +161,20 @@ class BusinessTableGateway {
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "businessId" => $bId,
+            "businessID" => $bId,
             "business_name" => $bN,
             "business_address" => $bA,
             "business_lat" => $bLt,
             "business_long" => $bLg,
-            "business_type" => $bT,
+            "business_type" => $bT
         );
+        
+        /*echo '<pre>';
+          print_r ($_POST);
+          print_r ($params);
+          print_r ($sqlQuery);
+          echo '</pre>';*/
+         
 
         $status = $statement->execute($params);
 

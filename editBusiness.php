@@ -14,14 +14,27 @@ require 'ensureUserLoggedIn.php';
 $connection = Connection::getInstance();
 $gateway = new BusinessTableGateway($connection);
 
-$businessID = filter_input(INPUT_POST, 'businessID', FILTER_SANITIZE_NUMBER_INT);
+$businessID = filter_input(INPUT_POST, 'businessID', FILTER_SANITIZE_STRING);
 $business_name = filter_input(INPUT_POST, 'business_name', FILTER_SANITIZE_STRING);
 $business_address = filter_input(INPUT_POST, 'business_address', FILTER_SANITIZE_STRING);
 $business_lat = filter_input(INPUT_POST, 'business_lat', FILTER_SANITIZE_STRING);
 $business_long = filter_input(INPUT_POST, 'business_long', FILTER_SANITIZE_STRING);
-$business_type = filter_input(INPUT_POST, '$business_type', FILTER_SANITIZE_NUMBER_INT);
+$business_type = filter_input(INPUT_POST, 'business_type', FILTER_SANITIZE_STRING);
 
-$gateway->updateBusiness($businessID, $business_name, $business_address, $business_lat, $business_long, $business_type);
+if(empty($errorMessage)){
+    $gateway->updateBusiness($businessID, $business_name, $business_address, $business_lat, $business_long, $business_type);
 
-header('Location: home.php');
-
+    header('Location: home.php');
+}
+else{
+    require 'editBusinessForm.php';
+    /*echo '<pre>';
+    print_r($businessID);
+    print_r($business_name);
+    print_r($business_address);
+    print_r($business_lat);
+    
+    echo '</pre>';
+     * */
+     
+}

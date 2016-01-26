@@ -24,13 +24,13 @@ else {
 if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
-$id = $_GET['id'];
+$bId = $_GET['id'];
 
 $connection = Connection::getInstance();
 $gateway = new BusinessTableGateway($connection);
 
 
-$statement = $gateway->getBusinesses($sortOrder, $filterName);
+$statement = $gateway->getBusinessById($bId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,7 +90,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);
 
                 <div class = "options col-md-3 col-xs-6">
                     <center>
-                        <a href="viewWards.php"><img src="img/ward2.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/ward2.png" alt="" class="img-responsive"></a>
                         <h4>Wards</h4>
                     </center>
                 </div>
@@ -191,7 +191,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            $('a.btn-info').tooltip()
+            $('a.btn-info').tooltip();
         </script>
     </body>
 </html>

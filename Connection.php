@@ -8,7 +8,7 @@ class Connection { //create a class to make the connection
         /* Creates new connection if connection doesn't already exist */
         if (Connection::$connection === NULL) {
             $host = 'localhost'; //specify login details to phpmyadmin page
-            $database = 'yoink_database';
+            $database = 'Yoink';
             $username = 'root';
             $password = '';
             $dsn = 'mysql:dbname=' . $database . ";host=" . $host;

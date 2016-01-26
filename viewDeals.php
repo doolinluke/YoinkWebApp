@@ -73,7 +73,7 @@ $deals = $dealGateway->getDeals($sortOrder);
                 <div class = "options col-md-3 col-xs-6">
                     <center>
                         <a href="home.php"><img src="img/patient2.png" alt="" class="img-responsive"></a>
-                        <h4>Patients</h4>
+                        <h4>Businesss</h4>
                     </center>
                 </div>
 
@@ -110,7 +110,7 @@ $deals = $dealGateway->getDeals($sortOrder);
             <table class="table table-bordered table-responsive">
                 <thead>
                     <tr>
-                        <th><a href="viewDeals.php?sortOrder=deal_description">Deal Name</a></th>
+                        <th><a href="viewDeals.php?sortOrder=deal_description">Deal Description</a></th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -122,9 +122,9 @@ $deals = $dealGateway->getDeals($sortOrder);
 
                         echo '<td>' . $row['deal_description'] . '</td>';
                         echo '<td>'
-                        . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $row['dealID'] . '">View</a> '
-                        . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $row['dealID'] . '">Edit</a> '
-                        . '<a class="deletePatient" href="deleteDeal.php?id=' . $row['dealID'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
+                        . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $row['dealId'] . '">View</a> '
+                        . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $row['dealId'] . '">Edit</a> '
+                        . '<a class="deleteBusiness" href="deleteDeal.php?id=' . $row['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
                         . '</td>';
                         echo '</tr>';
 

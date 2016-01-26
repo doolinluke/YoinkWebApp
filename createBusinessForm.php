@@ -105,7 +105,7 @@ $deals = $dealGateway->getDeals();
                 <table class="table table-bordered">                
                     <tbody>
                         <tr>
-                            <td>First Name</td>
+                            <td>Business Name</td>
                             <td>
                                 <input type="text" name="business_name" value="<?php
                                 if (isset($_POST) && isset($_POST['business_name'])) {
@@ -122,7 +122,7 @@ $deals = $dealGateway->getDeals();
                             </td>
                         </tr>
                         <tr>
-                            <td>First Name</td>
+                            <td>Address</td>
                             <td>
                                 <input type="text" name="business_address" value="<?php
                                 if (isset($_POST) && isset($_POST['business_address'])) {
@@ -139,7 +139,7 @@ $deals = $dealGateway->getDeals();
                             </td>
                         </tr>
                         <tr>
-                            <td>Second Name</td>
+                            <td>Latitude</td>
                             <td>
                                 <input type="text" name="business_lat" value="<?php
                                 if (isset($_POST) && isset($_POST['business_lat'])) {
@@ -156,7 +156,7 @@ $deals = $dealGateway->getDeals();
                             </td>
                         </tr>
                         <tr>
-                            <td>Address</td>
+                            <td>Longitude</td>
                             <td>
                                 <input type="text" name="business_long" value="<?php
                                 if (isset($_POST) && isset($_POST['business_long'])) {
@@ -173,7 +173,7 @@ $deals = $dealGateway->getDeals();
                             </td>
                         </tr>
                         <tr>
-                            <td>Phone Number</td>
+                            <td>Business Type</td>
                             <td>
                                 <input type="text" name="business_type" value="<?php
                                 if (isset($_POST) && isset($_POST['business_type'])) {

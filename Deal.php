@@ -12,8 +12,8 @@ class Deal {
 
     /* Contructor for attributes of the Deal class */
 
-    public function __construct($dID, $dD, $dC, $bId, $bN) {
-        $this->dealID = $dID;
+    public function __construct($dId, $dD, $dC, $bId, $bN) {
+        $this->dealId = $dId;
         $this->deal_description = $dD;
         $this->deal_category = $dC;
         $this->businessId = $bId;
