@@ -45,6 +45,7 @@ if (empty($errorMessage)) {
 
 if (empty($errorMessage)) {
     $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = $row['id'];
     header("Location: home.php");
 } else {
     require 'index.php';

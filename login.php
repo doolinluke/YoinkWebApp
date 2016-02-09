@@ -45,7 +45,8 @@
         </div>
         <?php
         if (!isset($username)) {
-            $username = '';
+            $username = 'jim';
+            $password = 'jim';
         }
         ?>
         <div class="container">            
@@ -71,7 +72,7 @@
                             <tr>
                                 <td>Password</td>
                                 <td>
-                                    <input type="password" name="password" value="" />
+                                    <input type="password" name="password" value="<?php echo $password; ?>" />
                                     <span id="passwordError" class="error">
                                         <?php
                                         if (isset($errorMessage) && isset($errorMessage['password'])) {

@@ -6,7 +6,7 @@ headerUpper {
 }
 
 body {
-    background-color: #fcfafa;
+    background-color: #e8ecf0;
 }
 
 .jumbotron {
@@ -50,13 +50,13 @@ body {
 }
 .navbar {
     height: 100px;
-    background-color: #f5f7fb;
-    border-bottom: 1px solid #dddddd;  
+    background-color: #121c25;
+    border-bottom: 1px solid #6b7781;  
     font-family: 'Lato', sans-serif;
 }
 
 .navbar-brand {
-    color: #506a85;
+    color: #121c25;
 }
 
 h1 {
@@ -90,7 +90,7 @@ h4 {
 }
 
 .jumbotron-2 {
-    background-image: url('../img/team.png');
+    background-image: url('../img/cocktails.png');
     background-repeat: no-repeat;
     min-height: 500px;
     margin-bottom: 0px;
@@ -103,7 +103,7 @@ h4 {
     font-family: 'Lato', sans-serif;
     font-weight: bolder;
     font-size: 40px;
-    color: #f5f7fa;
+    color: #fff;
     text-align: left;
     line-height: 50px;
     letter-spacing: 5px;
@@ -113,7 +113,7 @@ h4 {
 .jumbotron-2 p{
     font-family: Lato, sans-serif;
     font-size: 18px;
-    color: #f5f7fa;
+    color: #fff;
     text-align: left;
     vertical-align: middle;
 }
@@ -129,6 +129,16 @@ h4 {
     border: none;
     //text-shadow: shadow;
     font-weight: bold;
+}
+
+.jumbotron-3 {
+    background-image: url('../img/coffee.png');
+    background-repeat: no-repeat;
+    min-height: 500px;
+    margin-bottom: 0px;
+    vertical-align: middle;
+    margin-top: 50px;
+    margin-bottom: 40px;
 }
 
 .tour {
@@ -185,13 +195,13 @@ h4 {
 }
 
 .bottom {
-    background-color: #dddddd;
+    background-color: #121c25;
     min-height: 200px;
 }
 
 .bottom h3 {
     font-family: Lato, sans-serif;
-    color: #ffffff;
+    color: #6b7781;
     font-size: 16px;
     text-align: left;
     font-weight: bold;
@@ -199,7 +209,7 @@ h4 {
 
 .bottom p {
     font-family: Lato, sans-serif;
-    color: #3ca3ca;
+    color: #008080;
     font-size: 13px;
 }
 
@@ -218,7 +228,7 @@ h4 {
 
 .footer h3 {
     font-family: Lato, sans-serif;
-    color: #ffffff;
+    color: #6b7781;
     font-size: 16px;
     text-align: left;
 }
@@ -241,10 +251,10 @@ h4 {
 }
 
 .footerBar {
-    background-color: #898989;
+    background-color: #0f171e;
     font-family: Lato, sans-serif;
     font-size: 13px;
-    color: #3ca3ca; 
+    color: #008080; 
     min-height: 40px;
     text-align: center;
 }
@@ -289,10 +299,11 @@ h4 {
 .carousel-caption a {
     background-color: #3ca3ca;
     border: none;
+    margin-bottom: 20px;
 }
 
 .carousel-caption a:hover {
-    background-color: #00bc9c;
+    background-color: #008080;
     border: none;
 }
 
@@ -320,7 +331,7 @@ h4 {
 }
 
 .table td {
-    color: #3ca3ca;
+    color: #3d9999;
     font-family: 'Lato', sans-serif;
     font-size: 15px;
     border: 1px solid #dddddd;
@@ -331,7 +342,7 @@ h4 {
     color: #dddddd;
     font-size: 15px;
     border: 1px solid #858585;
-    background-color: #3ca3ca;
+    background-color: #008080;
 }
 
 .welcome h1 {
@@ -371,13 +382,15 @@ h4 {
 
 .nav li a {
     font-size: 15px;
+    background-color: #121c25;
 }
 
 .table th a {
     color: #ddd;
 }
 .nav li a:hover {
-    color: #3ca3ca;
+    color: #008080;
+    background-color: #ddd;
 }
 
 .logIn h1 {
@@ -397,13 +410,13 @@ h4 {
 }
 
 ul.nav a {
-    color: #3ca3ca !important;
+    color: #68747e !important;
     margin-right: 10px;
     margin-top: 15px;
 }
 
 ul.nav a:hover {
-    color: #969696 !important;
+    color: #008080 !important;
     border: none;
 }
 
@@ -431,7 +444,7 @@ row3 {
 .btn-signin:active,
 .btn-signin:focus
 {
-    background-color: #00bc9c !important;
+    background-color: #008080 !important;
 }
 
 .btn-register{
@@ -446,7 +459,7 @@ row3 {
 .btn-register:active,
 .btn-register:focus
 {
-    background-color: #00bc9c !important;
+    background-color: #008080 !important;
 }
 
 .footerGroup {
@@ -454,17 +467,17 @@ row3 {
 }
 
 .btn-view {
-    background-color: #3ca3ca;
+    background-color: #087197;
     color: #fff;
 }
 
 .btn-edit {
-    background-color: #00bc9c;
+    background-color: #08976E;
     color: #fff;
 }
 
 .btn-delete{
-    background-color: #f19897;
+    background-color: #B31E12;
     color: #fff;
 }
 
@@ -472,7 +485,7 @@ row3 {
 .btn-view:active,
 .btn-view:focus
 {
-    background-color: #6ac6e8;
+    background-color: #3869A0;
     color: #fff;
 }
 
@@ -480,7 +493,7 @@ row3 {
 .btn-edit:active,
 .btn-edit:focus
 {
-    background-color: #51d2bc;
+    background-color: #3BA889;
     color: #fff;
 }
 
@@ -488,12 +501,12 @@ row3 {
 .btn-delete:active,
 .btn-delete:focus
 {
-    background-color: #fcc3c3;
+    background-color: #C0554D;
     color: #fff;
 }
 
 .btn-create {
-    background-color: #3ca3ca;
+    background-color: #008080;
     color: #fff;
     margin-bottom: 60px;
 }
@@ -502,24 +515,25 @@ row3 {
 .btn-create:active,
 .btn-create:focus
 {
-    background-color: #00bc9c;
+    background-color: #087197;
     color: #fff;
 }
 
 .btn-logout {
-    background-color: #00bc9c;
-    color: #fff; 
+    background-color: #68747e;
+    color: #008080; 
 }
 .whiteFont{
    color: #fff; 
 }
 
 
-.btn-logout:hover,
-.btn-logout:active,
-.btn-logout:focus
+.btn-logout btn-md:hover,
+.btn-logout btn-md:active,
+.btn-logout btn-md:focus
 {
-    background-color: #3ca3ca !important;
+    background-color: #121c25 !important;
+    color: #008080 !important;
 }
 
 .carousel-inner > .item > img,
@@ -529,12 +543,25 @@ row3 {
 }
 
 .btn-create {
-    background-color: #3ca3ca;
+    background-color: #008080;
 }
 
 .btn-create:hover,
 .btn-create:active,
 .btn-create:focus
 {
-    background-color: #00bc9c !important;
+    background-color: #087197 !important;
+}
+
+.footer navbar-nav li a {
+    background-color: #121c25 !important;
+}
+
+.footer navbar-nav h3{
+    color: #636f79;
+}
+
+.btn btn-primary btn-large {
+    background-color: #008080;
+    color: #008080;
 }

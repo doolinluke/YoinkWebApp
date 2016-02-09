@@ -55,7 +55,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -79,31 +79,18 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
 
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/business1.png" alt="" class="img-responsive"></a>
-                        <h4>Businesss</h4>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
+                        <h4>Businesses</h4>
                     </center>
+                    
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal2.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
                     </center>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 require_once 'Connection.php';
 require_once 'DealTableGateway.php';
 require_once 'BusinessTableGateway.php';
+require_once 'UserTableGateway.php';
 
 $id = session_id();
 if ($id == "") {
@@ -9,11 +10,18 @@ if ($id == "") {
 }
 
 require 'ensureUserLoggedIn.php';
+$username = $_SESSION['user_id'];
+
+require 'ensureUserLoggedIn.php';
 
 $conn = Connection::getInstance();
 $dealGateway = new DealTableGateway($conn);
+$userGateway = new UserTableGateway($conn);
+$businessGateway = new BusinessTableGateway($conn);
 
 $deals = $dealGateway->getDeals();
+$users = $userGateway->getUserByUserName();
+$businesses = $businessGateway->getBusinesses();
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +49,7 @@ $deals = $dealGateway->getDeals();
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -64,31 +72,22 @@ $deals = $dealGateway->getDeals();
         </div>
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/patient1.png" alt="" class="img-responsive"></a>
-                        <h4>Businesss</h4>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
+                        <h4>Businesses</h4>
+                        <?php
+                    $userid = $_SESSION['user_id'];
+                    echo '<h3>Welcome ' . $userid . '</h3>';
+                    ?>
                     </center>
+                    
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal2.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
                     </center>
                 </div>
             </div>
@@ -110,6 +109,7 @@ $deals = $dealGateway->getDeals();
                                 <input type="text" name="business_name" value="<?php
                                 if (isset($_POST) && isset($_POST['business_name'])) {
                                     echo $_POST['business_name'];
+                              
                                 }
                                 ?>" />
                                 <span id="fNameError" class="error">
@@ -175,18 +175,16 @@ $deals = $dealGateway->getDeals();
                         <tr>
                             <td>Business Type</td>
                             <td>
-                                <input type="text" name="business_type" value="<?php
-                                if (isset($_POST) && isset($_POST['business_type'])) {
-                                    echo $_POST['business_type'];
-                                }
-                                ?>" />
-                                <span id="phoneNumberError" class="error">
+                                <select name="business_type">
+                                    <option value="-1">No Business</option>
                                     <?php
-                                    if (isset($errorMessage) && isset($errorMessage['business_type'])) {
-                                        echo $errorMessage['business_type'];
+                                    $b = $businesses->fetch(PDO::FETCH_ASSOC);
+                                    while ($b) {
+                                        echo '<option value="' . $b['business_type'] . '">' . $b['business_type'] . '</option>';
+                                        $b = $businesses->fetch(PDO::FETCH_ASSOC);
                                     }
                                     ?>
-                                </span>
+                                </select>
                             </td>
                         </tr>
                         <tr>

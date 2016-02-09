@@ -1,8 +1,10 @@
 <?php
 require_once 'Connection.php';
 require_once 'DealTableGateway.php';
+require_once 'BusinessTableGateway.php';
 
 require 'ensureUserLoggedIn.php';
+$username = $_SESSION['user_id'];
 
 /*if (isset($_GET) && isset($_GET['sortOrder'])) {
     $sortOrder = $_GET['sortOrder'];
@@ -15,10 +17,14 @@ else {
     $sortOrder = 'dealName';
 }*/
 
+$dealId = $_GET['id'];
+
 $connection = Connection::getInstance();
 $dealGateway = new DealTableGateway($connection);
+$gateway = new BusinessTableGateway($connection);
 
-$deals = $dealGateway->getDeals($sortOrder);
+$deals = $dealGateway->getDealByUserId($username);
+$businesses = $gateway->getBusinessByDealId($dealID);
 ?>
 <!DOCTYPE html>
 <html>
@@ -36,7 +42,6 @@ $deals = $dealGateway->getDeals($sortOrder);
     </head>
     <body>
         <!--<?php require 'toolbar.php' ?>-->
-        <?php require 'mainMenu.php' ?>
         <?php
         if (isset($errorMessage)) {
             echo '<p>Error: ' . $errorMessage . '</p>';
@@ -46,7 +51,7 @@ $deals = $dealGateway->getDeals($sortOrder);
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -70,31 +75,18 @@ $deals = $dealGateway->getDeals($sortOrder);
 
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/patient2.png" alt="" class="img-responsive"></a>
-                        <h4>Businesss</h4>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
+                        <h4>Businesses</h4>
                     </center>
+                    
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal1.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
                     </center>
                 </div>
             </div>
@@ -111,6 +103,8 @@ $deals = $dealGateway->getDeals($sortOrder);
                 <thead>
                     <tr>
                         <th><a href="viewDeals.php?sortOrder=deal_description">Deal Description</a></th>
+                        <th><a href="viewDeals.php?sortOrder=deal_category">Category</a></th>
+                        <th><a href="viewDeals.php?sortOrder=business_name">Business</a></th>
                         <th>Options</th>
                     </tr>
                 </thead>
@@ -121,6 +115,8 @@ $deals = $dealGateway->getDeals($sortOrder);
 
 
                         echo '<td>' . $row['deal_description'] . '</td>';
+                        echo '<td>' . $row['deal_category'] . '</td>';
+                        echo '<td>' . $row['businessId'] . '</td>';
                         echo '<td>'
                         . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $row['dealId'] . '">View</a> '
                         . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $row['dealId'] . '">Edit</a> '

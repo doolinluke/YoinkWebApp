@@ -21,24 +21,24 @@ class DealTableGateway {
 
         return $statement;
     }
-    
-    /*public function getDeals($sortOrder) {
-        // execute a query to get all patients
-        $sqlQuery = "SELECT p.*, w.dealName AS dealName
-                    FROM patient p
-                    LEFT JOIN deal w ON w.dealID = p.dealID
-                    ORDER BY " . $sortOrder;
 
-        $statement = $this->connection->prepare($sqlQuery);
-        
-        $status = $statement->execute($params);
+    /* public function getDeals($sortOrder) {
+      // execute a query to get all patients
+      $sqlQuery = "SELECT p.*, w.dealName AS dealName
+      FROM patient p
+      LEFT JOIN deal w ON w.dealID = p.dealID
+      ORDER BY " . $sortOrder;
 
-        if (!$status) {
-            die("Could not retrieve patients");
-        }
+      $statement = $this->connection->prepare($sqlQuery);
 
-        return $statement;
-    }*/
+      $status = $statement->execute($params);
+
+      if (!$status) {
+      die("Could not retrieve patients");
+      }
+
+      return $statement;
+      } */
 
     public function getDealById($dealId) {
         // execute a query to get the manager with the specified id
@@ -57,18 +57,38 @@ class DealTableGateway {
 
         return $statement;
     }
+    
+    public function getDealAndBusiness($dealID) {
+        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+        $sqlQuery = "SELECT d.deal_description, d.deal_category, b.business_name AS Business
+                    FROM business b 
+                    LEFT JOIN deal d ON d.businessId = b.businessID 
+                    WHERE d.dealId = :dealID";
+
+        $params = array(
+            "dealID" => $dealID
+        );
+        $statement = $this->connection->prepare($sqlQuery);
+        $status = $statement->execute($params);
+
+        if (!$status) {
+            die("Could not retrieve Deal");
+        }
+
+        return $statement;
+    }
 
     public function insertDeal($dD, $dC, $bId) {
         // execute a query to insert values into the deal table
         $sqlQuery = "INSERT INTO deal " .
                 "(deal_description, deal_category, businessID) " .
-                "VALUES (:deal_description, :deal_category, :businessID)";
+                "VALUES (:deal_description, :deal_category, :businessId)";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
             "deal_description" => $dD,
             "deal_category" => $dC,
-            "businessID" => $bId
+            "businessId" => $bId
         );
 
         $status = $statement->execute($params);
@@ -84,7 +104,7 @@ class DealTableGateway {
 
     public function deleteDeal($dealId) {
         // execute a query to delete row from deal where dealId = value entered
-        $sqlQuery = "DELETE FROM deal WHERE dealID = :dealID";
+        $sqlQuery = "DELETE FROM deal WHERE dealId = :dealId";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
@@ -107,11 +127,12 @@ class DealTableGateway {
                 "deal_category = :deal_category, " .
                 "businessId = :businessId, " .
                 "business_name = :business_name " .
-                "WHERE dealID = :dealID";
+                " WHERE dealId = :dealId";
+
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
-            "dealId" => $dealId,
+            "dealId" => $dId,
             "deal_description" => $dD,
             "deal_category" => $dC,
             "businessId" => $bId,
@@ -119,7 +140,7 @@ class DealTableGateway {
         );
 
         $status = $statement->execute($params);
-        
+
         if (!$status) {
             die("Could not update deal");
         }
@@ -127,4 +148,23 @@ class DealTableGateway {
         return ($statement->rowCount() == 1);
     }
 
+    public function getDealByUserId($uId) {
+        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+        $sqlQuery = "SELECT d.*, u.username AS username 
+                FROM Deal d 
+                LEFT JOIN users u ON u.id = d.userId 
+                WHERE u.id = :id";
+
+        $params = array(
+            "id" => $uId
+        );
+        $statement = $this->connection->prepare($sqlQuery);
+        $status = $statement->execute($params);
+
+        if (!$status) {
+            die("Could not retrieve Deal");
+        }
+
+        return $statement;
+}
 }

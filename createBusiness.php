@@ -9,6 +9,8 @@ if ($id == "") {
     session_start();
 }
 
+$userId = $_SESSION['user_id'];
+
 require 'ensureUserLoggedIn.php';
 
 $connection = Connection::getInstance();
@@ -21,6 +23,9 @@ $business_address = filter_input(INPUT_POST, 'business_address', FILTER_SANITIZE
 $business_lat = filter_input(INPUT_POST, 'business_lat',  FILTER_SANITIZE_NUMBER_FLOAT);
 $business_long = filter_input(INPUT_POST, 'business_long',  FILTER_SANITIZE_NUMBER_FLOAT);
 $business_type = filter_input(INPUT_POST, 'business_type', FILTER_SANITIZE_STRING);
+if ($userId == -1) {
+    $userId = null;
+}
 /*if ($dealId == -1) {
     $dealId = NULL;
 }*/
@@ -48,7 +53,7 @@ if ($business_type === FALSE || $business_type === '') {
 }
 
 //uses gateway to call insertBusiness method and passes in variables
-$businessId = $gateway->insertBusiness($business_name, $business_address, $business_lat, $business_long, $business_type);
+$businessId = $gateway->insertBusiness($business_name, $business_address, $business_lat, $business_long, $business_type, $userId);
 $message = "New Business Created";
 header("Location: home.php");
 

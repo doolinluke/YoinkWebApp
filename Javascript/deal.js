@@ -54,7 +54,7 @@ window.onload = function () {
     }
 
     //-------------------------------------------------------------------------
-    // define an event listener for the '#createProgrammerForm'
+    // define an event listener for the '#createDealForm'
     //-------------------------------------------------------------------------
     var editDealForm = document.getElementById('editDealForm');
     if (editDealForm !== null) {

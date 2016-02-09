@@ -6,6 +6,8 @@ if ($id == "") {
 }
 
 $_SESSION['username'] = NULL;
-unset($_SESSION['USERNAME']);
+$_SESSION['user_id'] = NULL;
+unset($_SESSION['username']);
+unset($_SESSION['user_id']);
 
 header("Location: index.php");

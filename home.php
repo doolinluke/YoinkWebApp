@@ -4,6 +4,7 @@ require_once 'Connection.php';
 require_once 'BusinessTableGateway.php';
 
 require 'ensureUserLoggedIn.php';
+$username = $_SESSION['user_id'];
 
 if (isset($_GET) && isset($_GET['sortOrder'])) {
     $sortOrder = $_GET['sortOrder'];
@@ -11,7 +12,8 @@ if (isset($_GET) && isset($_GET['sortOrder'])) {
     if (!in_array($sortOrder, $columnNames)) {
         $sortOrder = 'businessID';
     }
-} else {
+}
+else {
     $sortOrder = 'businessID';
 }
 
@@ -21,26 +23,11 @@ if (isset($_GET) && isset($_GET['filterName'])) {
     $filterName = NULL;
 }
 
+
 $connection = Connection::getInstance();
 $gateway = new BusinessTableGateway($connection);
+$statement = $gateway->getBusinessByUserId($username);
 
-$statement = $gateway->getBusinesses($sortOrder, $filterName);
-
-$id = session_id();
-/* checking if there is not already a session and if there is start it */
-if ($id == "") {
-    session_start();
-}
-//if events session is set add it to the array
-if (!isset($_SESSION['events'])) {
-    $events = array();
-    //hard coding variables into the array through parameters in another page
-
-    $_SESSION['events'] = $events;
-} else {
-    //making this session events
-    $events = $_SESSION['events'];
-}
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,6 +42,12 @@ if (!isset($_SESSION['events'])) {
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
         <script src="js/respond.js"></script>
+<!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&callback=initMap"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&libraries=places"></script>
+        <script src ="http://maps.googleapis.com/maps/api/geocode/output?parameters"></script>
+        <script type ="text/javascript">
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>-->
     </head>
     <body>
         <?php require 'toolbar.php' ?>
@@ -62,7 +55,7 @@ if (!isset($_SESSION['events'])) {
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><a href="home.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -86,7 +79,7 @@ if (!isset($_SESSION['events'])) {
         <div class = "row">
             <div class="welcome">
                 <div class="container">
-                    <h1>Businesss</h1>
+                    <h1>Your Businesses</h1>
                     <!--  Calls in the session $username the prints it out -->
                     <?php
                     $username = $_SESSION['username'];
@@ -103,39 +96,26 @@ if (!isset($_SESSION['events'])) {
 
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/business1.png" alt="" class="img-responsive"></a>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
                         <h4>Businesses</h4>
                     </center>
+                    
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal2.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
                     </center>
                 </div>
             </div>
         </div>
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-2">
+            <!--<div class="row">-->
+<!--                <div class="col-md-2">
                     <form class="form-horizontal" role="form" action="home.php?sortOrder=<?php echo $sortOrder; ?>" method="GET">                      
                         <div class="form-group">
                             <label class="control-label" for="lName">First Name</label>
@@ -153,18 +133,17 @@ if (!isset($_SESSION['events'])) {
                             </div>
                         </div>
                     </form>
-                </div>
-                
-                <div class="col-md-10">
+                </div>-->
+            <div class="row">    
+                <div class="col-md-12">
                     <table class="table table-bordered table-striped table-responsive">           
                         <thead>
                             <tr>
-                                <th><a href="home.php?sortOrder=businessID">ID</a></th>
-                                <th><a href="home.php?sortOrder=business_name">First Name</a></th>
-                                <th><a href="home.php?sortOrder=business_address">Surname</a></th>
-                                <th><a href="home.php?sortOrder=business_lat">Address</a></th>
-                                <th><a href="home.php?sortOrder=business_long">Phone</a></th>
-                                <th><a href="home.php?sortOrder=business_type">Email</a></th>
+                                <th><a href="home.php?sortOrder=business_name">Business Name</a></th>
+                                <th><a href="home.php?sortOrder=business_address">Address</a></th>
+                                <th><a href="home.php?sortOrder=business_lat">Latitude</a></th>
+                                <th><a href="home.php?sortOrder=business_long">Longitude</a></th>
+                                <th><a href="home.php?sortOrder=business_type">Category</a></th>
                                 <th>Options</th>
                             </tr>
                         </thead>
@@ -174,7 +153,6 @@ if (!isset($_SESSION['events'])) {
                             while ($row) {
 
                                 echo '<tr>';
-                                echo '<td>' . $row['businessID'] . '</td>';
                                 echo '<td>' . $row['business_name'] . '</td>';
                                 echo '<td>' . $row['business_address'] . '</td>';
                                 echo '<td>' . $row['business_lat'] . '</td>';
@@ -193,12 +171,11 @@ if (!isset($_SESSION['events'])) {
                         </tbody>
                     </table>
                 </div>
-
-                <div class="row">
-                    <div class="createButton">
-                        <div class="container">
-                            <a class="btn btn-create btn-large" href="createBusinessForm.php">Create new Business</a>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="createButton">
+                    <div class="container">
+                        <a class="btn btn-create btn-large" href="createBusinessForm.php">Create new Business</a>
                     </div>
                 </div>
             </div>
@@ -209,7 +186,9 @@ if (!isset($_SESSION['events'])) {
                 <div class = "bottom col-md-3 col-xs-6">
                     <ul class="footer navbar-nav">
                         <h3>FIND US HERE</h3>
-                        <li><img src="img/fbicon.png" alt="" class="img-responsive"></li>                    
+                        <li><img src="img/fbicon.png" onmouseover="this.src='img/fbiconfloat.png'" onmouseout="this.src='img/fbicon.png'" /></li>
+                        <li><img src="img/instaicon.png" onmouseover="this.src='img/instaiconfloat.png'" onmouseout="this.src='img/instaicon.png'" /></li>
+                        <li><img src="img/twittericon.png" onmouseover="this.src='img/twittericonfloat.png'" onmouseout="this.src='img/twittericon.png'" /></li>
                     </ul>
                 </div>
 
@@ -223,7 +202,7 @@ if (!isset($_SESSION['events'])) {
                     <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
                     <p>84 Ranelagh Road, Ranelagh, D6</p>
                     <p>Phone: 0871234567</p>
-                    <p>ranelaghmedcentre@gmail.com</p>
+                    <p>yoink@gmail.com</p>
                 </div>
 
                 <div class = "bottom col-md-3 col-xs-6">
@@ -237,7 +216,7 @@ if (!isset($_SESSION['events'])) {
 
         <div class="row">
             <div class = "footerBar col-md-12 col-xs-12">
-                <p>© Ranelagh Medical Centre. All rights reserved.</p>
+                <p>© YOINK! 2016. All rights reserved.</p>
             </div>
         </div>
         <!-- javascript -->

@@ -19,9 +19,11 @@ $dealId = $_GET['id'];
 $connection = Connection::getInstance();
 $dealGateway = new DealTableGateway($connection);
 $businessGateway = new BusinessTableGateway($connection);
+$businessGateway2 = new BusinessTableGateway($connection);
 
 $deals = $dealGateway->getDealById($dealId);
 $businesses = $businessGateway->getBusinessById($bId);
+$businessDeal = $businessGateway2->getBusinessByDealId($dealId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +51,7 @@ $businesses = $businessGateway->getBusinessById($bId);
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -72,31 +74,18 @@ $businesses = $businessGateway->getBusinessById($bId);
         </div>
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/business2.png" alt="" class="img-responsive"></a>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
                         <h4>Businesses</h4>
                     </center>
+                    
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal1.png" alt="" class="img-responsive"></a>
-                        <h4>Wards</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
+                        <h4>Deals</h4>
                     </center>
                 </div>
             </div>
@@ -106,6 +95,7 @@ $businesses = $businessGateway->getBusinessById($bId);
                 <tbody>
                     <?php
                     $deal = $deals->fetch(PDO::FETCH_ASSOC);
+                    $bus = $businessDeal->fetch(PDO::FETCH_ASSOC);
                     echo '<tr>';
                     echo '<td>Deal</td>'
                     . '<td>' . $deal['deal_description'] . '</td>';
@@ -115,13 +105,13 @@ $businesses = $businessGateway->getBusinessById($bId);
                     . '<td>' . $deal['deal_category'] . '</td>';
                     echo '</tr>';
                     echo '<tr>';
-                    echo '<td>Category</td>'
-                    . '<td>' . $deal['business_name'] . '</td>';
+                    echo '<td>Business</td>'
+                    . '<td>' . $bus['business_name'] . '</td>';
                     echo '</tr>';
                     echo '<th>Options</th>'
                     . '<td>'
                     . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $deal['dealId'] . '">Edit</a> '
-                    . '<a class="deleteDeal" href="deleteWard.php?id=' . $deal['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
+                    . '<a class="deleteDeal" href="deleteDeal.php?id=' . $deal['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
                     . '</td>';
                     echo'</tr>';
                     ?>
@@ -129,48 +119,7 @@ $businesses = $businessGateway->getBusinessById($bId);
             </table>
         </div>
 
-        <div class="row2 col-lg-12">
-            <div class="container">
-                <div class="tour col-lg-12">
-                    <h1>Businesses assigned to <?php echo $deal['deal_description']; ?></h1>
-                </div>
-                <?php if ($businesses->rowCount() !== 0) { ?>
-                    <table class="table table-bordered table-responsive">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Address</th>
-                                <th>Phone Number</th>
-                                <th>Email</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            $row = $businesss->fetch(PDO::FETCH_ASSOC);
-                            while ($row) {
-                                echo '<td>' . $row['business_name'] . '</td>';
-                                echo '<td>' . $row['business_address'] . '</td>';
-                                echo '<td>' . $row['business_lat'] . '</td>';
-                                echo '<td>' . $row['business_long'] . '</td>';
-                                echo '<td>' . $row['business_type'] . '</td>';
-                                echo '<td>'
-                                . '<a class="btn btn-view btn-xs" href="viewBusiness.php?id=' . $row['businessID'] . '">View</a> '
-                                . '<a class="btn btn-edit btn-xs" href="editBusinessForm.php?id=' . $row['businessID'] . '">Edit</a> '
-                                . '<a class="deleteBusiness" href="deleteBusiness.php?id=' . $row['businessID'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
-                                . '</td>';
-                                echo '</tr>';
-
-                                $row = $businesss->fetch(PDO::FETCH_ASSOC);
-                            }
-                            ?>
-                        </tbody>
-                    </table>
-                <?php } else { ?>
-                    <p>There are no businesses assigned to this deal.</p>
-                <?php } ?>
-            </div>
-        </div>
+        
         <div class="footerGroup">
             <div class = "row">
                 <div class="row3">

@@ -9,11 +9,14 @@ if ($id == "") {
 }
 
 require 'ensureUserLoggedIn.php';
+$username = $_SESSION['user_id'];
 
 $conn = Connection::getInstance();
 $dealGateway = new DealTableGateway($conn);
+$businessGateway = new BusinessTableGateway($conn);
 
 $deals = $dealGateway->getDeals();
+$businesses = $businessGateway->getBusinessByUserId($username);
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,7 +44,7 @@ $deals = $dealGateway->getDeals();
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -64,31 +67,18 @@ $deals = $dealGateway->getDeals();
         </div>
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/business1.png" alt="" class="img-responsive"></a>
-                        <h4>Businesss</h4>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src = 'img/companyFloat.png'" onmouseout="this.src = 'img/company.png'" /></a>
+                        <h4>Businesses</h4>
                     </center>
+
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <p><img src="img/deal2.png" alt="" class="img-responsive"></p>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src = 'img/dealFloat.png'" onmouseout="this.src = 'img/deal.png'" /></a>
                         <h4>Deals</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
                     </center>
                 </div>
             </div>
@@ -121,7 +111,7 @@ $deals = $dealGateway->getDeals();
                                 </span>
                             </td>
                         </tr>
-                        <tr>
+<!--                        <tr>
                             <td>Deal Category</td>
                             <td>
                                 <input type="text" name="deal_category" value="<?php
@@ -137,19 +127,45 @@ $deals = $dealGateway->getDeals();
                                     ?>
                                 </span>
                             </td>
+                        </tr>-->
+                        <tr>
+                            <td>Deal Category</td>
+                            <td>
+                                <select name="deal_category">
+                                    <option value="-1">....</option>
+                                    <option value="Food & Drink">Food & Drink</option>
+                                    <option value="Pubs">Pubs</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Movies, Games & Music">Movies, Games & Music</option>
+                                    <option value="Miscellaneous">Miscellaneous</option>
+                                    <input type="submit" name="deal_category" value="<?php
+                                    if (isset($_POST) && isset($_POST['deal_category'])) {
+                                        echo $_POST['deal_category'];
+                                    }
+                                    ?>" />
+                                    <span id="dealCategoryError" class="error">
+                                    <?php
+                                    if (isset($errorMessage) && isset($errorMessage['dealCategoryError'])) {
+                                        echo $errorMessage['dealCategoryError'];
+                                    }
+                                    ?>
+                                </span>
+                                </select>
+                            </td>
                         </tr>
                         <tr>
                             <td>Business</td>
                             <td>
-                                <select name="businessID">
+                                <select name="businessId">
                                     <option value="-1">No Business</option>
                                     <?php
-                                    $b = $businessID->fetch(PDO::FETCH_ASSOC);
+                                    $b = $businesses->fetch(PDO::FETCH_ASSOC);
                                     while ($b) {
                                         echo '<option value="' . $b['businessID'] . '">' . $b['business_name'] . '</option>';
                                         $b = $businesses->fetch(PDO::FETCH_ASSOC);
                                     }
                                     ?>
+                                </select>
                             </td>
                         </tr>
                     </tbody>
@@ -198,7 +214,7 @@ $deals = $dealGateway->getDeals();
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script>
-            $('a.btn-info').tooltip()
+                            $('a.btn-info').tooltip()
         </script>
     </body>
 </html>

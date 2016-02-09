@@ -2,6 +2,7 @@
 require_once 'Deal.php';
 require_once 'Connection.php';
 require_once 'DealTableGateway.php';
+require_once 'BusinessTableGateway.php';
 
 $id = session_id();
 if ($id == "") {
@@ -13,12 +14,16 @@ require 'ensureUserLoggedIn.php';
 if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
-$id = $_GET['id'];
+$dealId = $_GET['id'];
 
 $connection = Connection::getInstance();
 $gateway = new DealTableGateway($connection);
 
-$statement = $gateway->getDealById($id);
+$businessGateway = new BusinessTableGateway($connection);
+
+$businesses = $businessGateway->getBusinesses();
+
+$statement = $gateway->getDealById($dealId);
 if ($statement->rowCount() !== 1) {
     die("Illegal request");
 }
@@ -29,7 +34,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
     <head>
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
         <meta charset="UTF-8">
-        <script type="text/javascript" src="Javascript/deal.js"></script>
+        <script type="text/javascript" src="Javascript/business.js"></script>
         <title>Medical Centre</title>
         <meta charset="utf-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +55,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -74,43 +79,32 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
 
         <div class = "row">
             <div class="container">
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="home.php"><img src="img/patient2.png" alt="" class="img-responsive"></a>
-                        <h4>Patients</h4>
+                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
+                        <h4>Businesses</h4>
                     </center>
+                    
                 </div>
 
-                <div class = "options col-md-3 col-xs-6">
+                <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal1.png" alt="" class="img-responsive"></a>
+                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/doctor.png" alt="" class="img-responsive"></p>
-                        <h4>Doctors</h4>
-                    </center>
-                </div>
-
-                <div class = "options col-md-3 col-xs-6">
-                    <center>
-                        <p><img src="img/madication.png" alt="" class="img-responsive"></p>
-                        <h4>Medication</h4>
                     </center>
                 </div>
             </div>
         </div>
+        
+        
 
         <div class="container">
             <form id="editDealForm" name="editDealForm" action="editDeal.php" method="POST">
-                <input type="hidden" name="id" value="<?php echo $id; ?>" />
+                <input type="hidden" name="id" value="<?php echo $dealId; ?>" />
                 <table class="table table-bordered table-responsive">
                     <tbody>
                         <tr>
-                            <td>Deal Name</td>
+                            <td>Deal</td>
                             <td>
                                 <input type="text" name="deal_description" value="<?php
                                 if (isset($_POST) && isset($_POST['deal_description'])) {
@@ -128,25 +122,25 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             </td>
                         </tr>
                         <tr>
-                            <td>Deal Name</td>
+                            <td>Deal Category</td>
                             <td>
                                 <input type="text" name="deal_category" value="<?php
-                                if (isset($_POST) && isset($_POST['deal_description'])) {
-                                    echo $_POST['deal_description'];
+                                if (isset($_POST) && isset($_POST['deal_category'])) {
+                                    echo $_POST['deal_category'];
                                 } else
-                                    echo $row['deal_description']
+                                    echo $row['deal_category']
                                     ?>" />
                                 <span id="dealNameError" class="error">
                                     <?php
-                                    if (isset($errorMessage) && isset($errorMessage['deal_description'])) {
-                                        echo $errorMessage['deal_description'];
+                                    if (isset($errorMessage) && isset($errorMessage['deal_category'])) {
+                                        echo $errorMessage['deal_category'];
                                     }
                                     ?>
                                 </span>
                             </td>
                         </tr>
                         <tr>
-                            <td>Deal Name</td>
+                            <td>Business</td>
                             <td>
                                 <input type="text" name="business_name" value="<?php
                                 if (isset($_POST) && isset($_POST['business_name'])) {
@@ -173,7 +167,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                 </table>
             </form>
         </div>
-        <div class="footerGroup navbar-fixed-bottom">
+        <div class="footerGroup navbar">
             <div class = "row">
                 <div class="row3">
                     <div class = "bottom col-md-3 col-xs-6">
