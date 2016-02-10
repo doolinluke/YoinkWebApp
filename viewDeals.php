@@ -116,7 +116,7 @@ $businesses = $gateway->getBusinessByDealId($dealID);
 
                         echo '<td>' . $row['deal_description'] . '</td>';
                         echo '<td>' . $row['deal_category'] . '</td>';
-                        echo '<td>' . $row['businessId'] . '</td>';
+                        echo '<td>' . $row['business_name'] . '</td>';
                         echo '<td>'
                         . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $row['dealId'] . '">View</a> '
                         . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $row['dealId'] . '">Edit</a> '

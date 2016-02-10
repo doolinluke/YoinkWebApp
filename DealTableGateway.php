@@ -78,17 +78,18 @@ class DealTableGateway {
         return $statement;
     }
 
-    public function insertDeal($dD, $dC, $bId) {
+    public function insertDeal($dD, $dC, $bId, $uId) {
         // execute a query to insert values into the deal table
         $sqlQuery = "INSERT INTO deal " .
-                "(deal_description, deal_category, businessID) " .
-                "VALUES (:deal_description, :deal_category, :businessId)";
+                "(deal_description, deal_category, businessID, userId) " .
+                "VALUES (:deal_description, :deal_category, :businessId, :userId)";
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
             "deal_description" => $dD,
             "deal_category" => $dC,
-            "businessId" => $bId
+            "businessId" => $bId,
+            "userId" => $uId
         );
 
         $status = $statement->execute($params);
@@ -120,24 +121,26 @@ class DealTableGateway {
         return ($statement->rowCount() == 1);
     }
 
-    public function updateDeal($dId, $dD, $dC, $bId, $bN) {
+    public function updateDeal($dId, $dD, $dC, $bId) {
         // execute a query to update deal
         $sqlQuery = "UPDATE deal SET " .
                 "deal_description = :deal_description, " .
                 "deal_category = :deal_category, " .
-                "businessId = :businessId, " .
-                "business_name = :business_name " .
+                "businessId = :businessId " .
                 " WHERE dealId = :dealId";
-
-
+ 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
             "dealId" => $dId,
             "deal_description" => $dD,
             "deal_category" => $dC,
-            "businessId" => $bId,
-            "business_name" => $bN
+            "businessId" => $bId
         );
+        
+        echo '<pre>';
+        print_r($params);
+        print_r($statement);
+        echo '</pre>';
 
         $status = $statement->execute($params);
 
@@ -150,9 +153,10 @@ class DealTableGateway {
 
     public function getDealByUserId($uId) {
         // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
-        $sqlQuery = "SELECT d.*, u.username AS username 
+        $sqlQuery = "SELECT d.*, u.username AS username, b.business_name 
                 FROM Deal d 
                 LEFT JOIN users u ON u.id = d.userId 
+                LEFT JOIN business b ON d.businessId = b.businessID 
                 WHERE u.id = :id";
 
         $params = array(

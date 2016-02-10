@@ -9,21 +9,23 @@ if ($id == "") {
     session_start();
 }
 
+$dealId = $_SESSION['id'];
+
 require 'ensureUserLoggedIn.php';
 
 $connection = Connection::getInstance();
 $gateway = new DealTableGateway($connection);
 
-$dealId = filter_input(INPUT_POST, 'dealId', FILTER_SANITIZE_NUMBER_INT);
+//$dealId = filter_input(INPUT_POST, 'dealId', FILTER_SANITIZE_NUMBER_INT);
 $deal_description = filter_input(INPUT_POST, 'deal_description', FILTER_SANITIZE_STRING);
 $deal_category = filter_input(INPUT_POST, 'deal_category', FILTER_SANITIZE_STRING);
 $businessId = filter_input(INPUT_POST, 'businessId', FILTER_SANITIZE_STRING);
-$business_name = filter_input(INPUT_POST, '$business_name', FILTER_SANITIZE_STRING);
+//$business_name = filter_input(INPUT_POST, '$business_name', FILTER_SANITIZE_STRING);
 if($dealId === -1) {
     $dealId = NULL;
 }
 
-$gateway->updateDeal($dealId, $deal_description, $deal_category, $businessId, $business_name);
+$gateway->updateDeal($dealId, $deal_description, $deal_category, $businessId);
 
 header('Location: viewDeals.php');
 

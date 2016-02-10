@@ -10,18 +10,20 @@ if ($id == "") {
 }
 
 require 'ensureUserLoggedIn.php';
+$username = $_SESSION['user_id'];
 
 if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
 $dealId = $_GET['id'];
+//$_SESSION['id'] = $dealId;
 
 $connection = Connection::getInstance();
 $gateway = new DealTableGateway($connection);
 
 $businessGateway = new BusinessTableGateway($connection);
 
-$businesses = $businessGateway->getBusinesses();
+$businesses = $businessGateway->getBusinessByUserId($username);
 
 $statement = $gateway->getDealById($dealId);
 if ($statement->rowCount() !== 1) {
@@ -83,6 +85,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                     <center>
                         <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
                         <h4>Businesses</h4>
+                        
                     </center>
                     
                 </div>
@@ -124,39 +127,49 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td>Deal Category</td>
                             <td>
-                                <input type="text" name="deal_category" value="<?php
-                                if (isset($_POST) && isset($_POST['deal_category'])) {
-                                    echo $_POST['deal_category'];
-                                } else
-                                    echo $row['deal_category']
+                                <select name="deal_category">
+                                    <option value="-1">....</option>
+                                    <option value="Clothing">Clothing</option>
+                                    <option value="Food & Drink">Food & Drink</option>
+                                    <option value="Pubs">Pubs</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Movies, Games & Music">Movies, Games & Music</option>
+                                    <option value="Miscellaneous">Miscellaneous</option>
+                                    <input type="submit" name="deal_category" value="<?php
+                                    if (isset($_POST) && isset($_POST['deal_category'])) {
+                                        echo $_POST['deal_category'];
+                                    }
                                     ?>" />
-                                <span id="dealNameError" class="error">
+                                    <span id="dealCategoryError" class="error">
                                     <?php
-                                    if (isset($errorMessage) && isset($errorMessage['deal_category'])) {
-                                        echo $errorMessage['deal_category'];
+                                    if (isset($errorMessage) && isset($errorMessage['dealCategoryError'])) {
+                                        echo $errorMessage['dealCategoryError'];
                                     }
                                     ?>
                                 </span>
+                                </select>
                             </td>
                         </tr>
                         <tr>
                             <td>Business</td>
                             <td>
-                                <input type="text" name="business_name" value="<?php
-                                if (isset($_POST) && isset($_POST['business_name'])) {
-                                    echo $_POST['business_name'];
-                                } else
-                                    echo $row['business_name']
-                                    ?>" />
-                                <span id="dealNameError" class="error">
+                                <select name="businessId">
+                                    <option value="-1">No Business</option>
                                     <?php
-                                    if (isset($errorMessage) && isset($errorMessage['business_name'])) {
-                                        echo $errorMessage['business_name'];
+                                    $b = $businesses->fetch(PDO::FETCH_ASSOC);
+                                    while ($b) {
+                                        echo '<option value="' . $b['businessID'] . '">' . $b['business_name'] . '</option>';
+                                        $b = $businesses->fetch(PDO::FETCH_ASSOC);
                                     }
                                     ?>
-                                </span>
+                                </select>
                             </td>
                         </tr>
+                          <?php 
+                            $dealId = $_SESSION['id'];
+                            echo $dealId;   
+                                    ?>
+                                    
                         <tr>
                             <td></td>
                             <td>
@@ -167,41 +180,42 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                 </table>
             </form>
         </div>
-        <div class="footerGroup navbar">
-            <div class = "row">
-                <div class="row3">
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <ul class="footer navbar-nav">
-                            <h3>FIND US HERE</h3>
-                            <li><img src="img/fbicon.png" alt="" class="img-responsive"></li>                    
-                        </ul>
-                    </div>
+        <div class = "row">
+            <div class="row3">
+                <div class = "bottom col-md-3 col-xs-6">
+                    <ul class="footer navbar-nav">
+                        <h3>FIND US HERE</h3>
+                        <li><img src="img/fbicon.png" onmouseover="this.src='img/fbiconfloat.png'" onmouseout="this.src='img/fbicon.png'" /></li>
+                        <li><img src="img/instaicon.png" onmouseover="this.src='img/instaiconfloat.png'" onmouseout="this.src='img/instaicon.png'" /></li>
+                        <li><img src="img/twittericon.png" onmouseover="this.src='img/twittericonfloat.png'" onmouseout="this.src='img/twittericon.png'" /></li>
+                    </ul>
+                </div>
 
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>SEE OUR ENDORSEMENTS</h3>
-                        <p>Click here to read reviews from satisfied members as well as professional endorsements and testimonials from highly regarded medical professionals.</p>
-                    </div>
+                <div class = "bottom col-md-3 col-xs-6">
+                    <h3>SEE OUR ENDORSEMENTS</h3>
+                    <p>Click here to read reviews from satisfied members as well as professional endorsements and testimonials from highly regarded medical professionals.</p>
+                </div>
 
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>CONTACT US</h3>
-                        <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
-                        <p>84 Ranelagh Road, Ranelagh, D6</p>
-                        <p>Phone: 0871234567</p>
-                        <p>ranelaghmedcentre@gmail.com</p>
-                    </div>
+                <div class = "bottom col-md-3 col-xs-6">
+                    <h3>CONTACT US</h3>
+                    <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
+                    <p>84 Ranelagh Road, Ranelagh, D6</p>
+                    <p>Phone: 0871234567</p>
+                    <p>yoink@gmail.com</p>
+                </div>
 
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>JOIN OUR MAILING LIST</h3>
-                        <p>Enter you email address to keep up to date with new membership offers.</p>
-                        <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
-                        <a class="btn btn-primary btn-large" href="#">Subscribe</a>
-                    </div>
+                <div class = "bottom col-md-3 col-xs-6">
+                    <h3>JOIN OUR MAILING LIST</h3>
+                    <p>Enter you email address to keep up to date with new membership offers.</p>
+                    <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
+                    <a class="btn btn-primary btn-large" href="#">Subscribe</a>
                 </div>
             </div>
-            <div class="row">
-                <div class = "footerBar col-md-12 col-xs-12">
-                    <p>© Ranelagh Medical Centre. All rights reserved.</p>
-                </div>
+        </div>
+
+        <div class="row">
+            <div class = "footerBar col-md-12 col-xs-12">
+                <p>© YOINK! 2016. All rights reserved.</p>
             </div>
         </div>
         <!-- javascript -->

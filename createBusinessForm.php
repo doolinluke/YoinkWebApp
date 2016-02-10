@@ -38,13 +38,13 @@ $businesses = $businessGateway->getBusinesses();
         <script src="js/respond.js"></script>
     </head>
     <body>
-        <!--<?php require 'toolbar.php' ?>-->
+<!--        <?php require 'toolbar.php' ?>
         <?php require 'mainMenu.php' ?>
         <?php
         if (isset($errorMessage)) {
             echo '<p>Error: ' . $errorMessage . '</p>';
         }
-        ?> 
+        ?> -->
         <div class="row"> 
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">

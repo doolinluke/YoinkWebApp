@@ -78,7 +78,9 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                 <div class = "options col-md-6 col-xs-6">
                     <center>
                         <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src = 'img/dealFloat.png'" onmouseout="this.src = 'img/deal.png'" /></a>
-                        <h4>Deals</h4>
+                        <h4>Deals</h4>\<?php
+                    $userid = $_SESSION['user_id'];
+                    ?>
                     </center>
                 </div>
             </div>
@@ -133,6 +135,7 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                             <td>
                                 <select name="deal_category">
                                     <option value="-1">....</option>
+                                    <option value="Clothing">Clothing</option>
                                     <option value="Food & Drink">Food & Drink</option>
                                     <option value="Pubs">Pubs</option>
                                     <option value="Electronics">Electronics</option>

@@ -9,6 +9,8 @@ if ($id == "") {
     session_start();
 }
 
+$userId = $_SESSION['user_id'];
+
 require 'ensureUserLoggedIn.php';
 
 $connection = Connection::getInstance();
@@ -24,6 +26,9 @@ if ($dealId == -1) {
     $dealId = NULL;
 }
 
+if ($userId == -1) {
+    $userId = null;
+}
 //if statements to validate form, works with createDeal.php
 $errorMessage = array();
 if ($deal_description === FALSE || $deal_description === '') {
@@ -39,7 +44,7 @@ if ($businessId === FALSE || $businessId === '') {
 }
 
 //uses gateway to call insertDeal method and passes in variables
-$dealId = $gateway->insertDeal($deal_description, $deal_category, $businessId);
+$dealId = $gateway->insertDeal($deal_description, $deal_category, $businessId, $userId);
 $message = "New Deal Created";
 header("Location: viewDeals.php");
 

@@ -119,42 +119,42 @@ $businessDeal = $businessGateway2->getBusinessByDealId($dealId);
             </table>
         </div>
 
-        
-        <div class="footerGroup">
-            <div class = "row">
-                <div class="row3">
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <ul class="footer navbar-nav">
-                            <h3>FIND US HERE</h3>
-                            <li><img src="img/fbicon.png" alt="" class="img-responsive"></li>                    
-                        </ul>
-                    </div>
+        <div class = "row">
+            <div class="row3">
+                <div class = "bottom col-md-3 col-xs-6">
+                    <ul class="footer navbar-nav">
+                        <h3>FIND US HERE</h3>
+                        <li><img src="img/fbicon.png" onmouseover="this.src='img/fbiconfloat.png'" onmouseout="this.src='img/fbicon.png'" /></li>
+                        <li><img src="img/instaicon.png" onmouseover="this.src='img/instaiconfloat.png'" onmouseout="this.src='img/instaicon.png'" /></li>
+                        <li><img src="img/twittericon.png" onmouseover="this.src='img/twittericonfloat.png'" onmouseout="this.src='img/twittericon.png'" /></li>
+                    </ul>
+                </div>
 
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>SEE OUR ENDORSEMENTS</h3>
-                        <p>Click here to read reviews from satisfied members as well as professional endorsements and testimonials from highly regarded medical professionals.</p>
-                    </div>
+                <div class = "bottom col-md-3 col-xs-6">
+                    <h3>SEE OUR ENDORSEMENTS</h3>
+                    <p>Click here to read reviews from satisfied members as well as professional endorsements and testimonials from highly regarded medical professionals.</p>
+                </div>
 
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>CONTACT US</h3>
-                        <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
-                        <p>84 Ranelagh Road, Ranelagh, D6</p>
-                        <p>Phone: 0871234567</p>
-                        <p>ranelaghmedcentre@gmail.com</p>
-                    </div>
+                <div class = "bottom col-md-3 col-xs-6">
+                    <h3>CONTACT US</h3>
+                    <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
+                    <p>84 Ranelagh Road, Ranelagh, D6</p>
+                    <p>Phone: 0871234567</p>
+                    <p>yoink@gmail.com</p>
+                </div>
 
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>JOIN OUR MAILING LIST</h3>
-                        <p>Enter you email address to keep up to date with new membership offers.</p>
-                        <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
-                        <a class="btn btn-primary btn-large" href="#">Subscribe</a>
-                    </div>
+                <div class = "bottom col-md-3 col-xs-6">
+                    <h3>JOIN OUR MAILING LIST</h3>
+                    <p>Enter you email address to keep up to date with new membership offers.</p>
+                    <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
+                    <a class="btn btn-primary btn-large" href="#">Subscribe</a>
                 </div>
             </div>
-            <div class="row">
-                <div class = "footerBar col-md-12 col-xs-12">
-                    <p>© Ranelagh Medical Centre. All rights reserved.</p>
-                </div>
+        </div>
+
+        <div class="row">
+            <div class = "footerBar col-md-12 col-xs-12">
+                <p>© YOINK! 2016. All rights reserved.</p>
             </div>
         </div>
         <!-- javascript -->
