@@ -59,10 +59,10 @@ $deals = $dealGateway->getDealByUserId($username);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> 
-                            <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>
+<!--                        <li><a href="index.php">Home</a></li>                    
+                            <li><a href="#">Services</a></li> -->
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
                         </ul> 
                     </div>
@@ -70,7 +70,7 @@ $deals = $dealGateway->getDealByUserId($username);
             </nav> 
         </div>
 
-        <div class = "row">
+<!--        <div class = "row">
             <div class="container">
                 <div class = "options col-md-6 col-xs-6">
                     <center>
@@ -82,12 +82,12 @@ $deals = $dealGateway->getDealByUserId($username);
 
                 <div class = "options col-md-6 col-xs-6">
                     <center>
-                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
+                        <a href="viewDeals.php"><img src="img/dealFloat.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/dealFloat.png'" /></a>
                         <h4>Deals</h4>
                     </center>
                 </div>
             </div>
-        </div>
+        </div>-->
 
         <div class="welcome">
             <div class="container">

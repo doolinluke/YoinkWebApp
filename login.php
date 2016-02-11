@@ -26,10 +26,10 @@
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>                    
+<!--                            <li><a href="index.php">Home</a></li>                    
                             <li><a href="#">Services</a></li> 
                             <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="#">Contact</a></li>-->
                             <li class=""><?php require 'toolbar.php' ?></li>
                         </ul> 
                     </div>

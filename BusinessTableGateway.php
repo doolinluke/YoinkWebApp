@@ -129,9 +129,10 @@ class BusinessTableGateway {
         return $statement;
     }
 
-    public function getBusinessByUserId($uId) {
+    public function getBusinessByUserId($uId, $sortOrder) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM business WHERE userId = :id";
+        $sqlQuery = "SELECT * FROM business WHERE userId = :id" .
+                    " ORDER BY " . $sortOrder;
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(

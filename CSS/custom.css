@@ -190,6 +190,12 @@ h4 {
     margin-top: 150px;
 }
 
+.options-home {
+    font-family: Lato, sans-serif;
+    color: #969696;
+    margin-top: 150px;
+}
+
 .options h4 {
     color: #969696;
     text-align: center;
@@ -371,7 +377,8 @@ h4 {
     font-family: 'Lato', sans-serif;
     color: #969696;
     font-size: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
+    margin-top: 150px;
     font-weight: bold;
 }
 

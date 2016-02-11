@@ -11,12 +11,23 @@ if ($id == "") {
 require 'ensureUserLoggedIn.php';
 $username = $_SESSION['user_id'];
 
+if (isset($_GET) && isset($_GET['sortOrder'])) {
+    $sortOrder = $_GET['sortOrder'];
+    $columnNames = array("businessID", "business_name", "business_address", "business_lat", "business_long", "business_type");
+    if (!in_array($sortOrder, $columnNames)) {
+        $sortOrder = 'businessID';
+    }
+}
+else {
+    $sortOrder = 'businessID';
+}
+
 $conn = Connection::getInstance();
 $dealGateway = new DealTableGateway($conn);
 $businessGateway = new BusinessTableGateway($conn);
 
 $deals = $dealGateway->getDeals();
-$businesses = $businessGateway->getBusinessByUserId($username);
+$businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
 ?>
 <!DOCTYPE html>
 <html>
@@ -55,17 +66,17 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> 
-                            <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>
+<!--                        <li><a href="index.php">Home</a></li>                    
+                            <li><a href="#">Services</a></li> -->
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
-                        </ul> 
+                        </ul>
                     </div>
                 </div>
             </nav> 
         </div>
-        <div class = "row">
+<!--        <div class = "row">
             <div class="container">
                 <div class = "options col-md-6 col-xs-6">
                     <center>
@@ -79,12 +90,12 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                     <center>
                         <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src = 'img/dealFloat.png'" onmouseout="this.src = 'img/deal.png'" /></a>
                         <h4>Deals</h4>\<?php
-                    $userid = $_SESSION['user_id'];
-                    ?>
+                        $userid = $_SESSION['user_id'];
+                        ?>
                     </center>
                 </div>
             </div>
-        </div>
+        </div>-->
         <div class = "row">
             <div class="welcome">
                 <div class="container">
@@ -117,16 +128,16 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                             <td>Deal Category</td>
                             <td>
                                 <input type="text" name="deal_category" value="<?php
-                                if (isset($_POST) && isset($_POST['deal_category'])) {
-                                    echo $_POST['deal_category'];
-                                }
-                                ?>" />
+                        if (isset($_POST) && isset($_POST['deal_category'])) {
+                            echo $_POST['deal_category'];
+                        }
+                        ?>" />
                                 <span id="dealNameError" class="error">
-                                    <?php
-                                    if (isset($errorMessage) && isset($errorMessage['dealNameError'])) {
-                                        echo $errorMessage['dealNameError'];
-                                    }
-                                    ?>
+                        <?php
+                        if (isset($errorMessage) && isset($errorMessage['dealNameError'])) {
+                            echo $errorMessage['dealNameError'];
+                        }
+                        ?>
                                 </span>
                             </td>
                         </tr>-->
@@ -135,24 +146,28 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                             <td>
                                 <select name="deal_category">
                                     <option value="-1">....</option>
-                                    <option value="Clothing">Clothing</option>
-                                    <option value="Food & Drink">Food & Drink</option>
-                                    <option value="Pubs">Pubs</option>
+                                    <option value="Café">Café</option>
+                                    <option value="Clothes & Fashion">Clothes & Fashion</option>
                                     <option value="Electronics">Electronics</option>
-                                    <option value="Movies, Games & Music">Movies, Games & Music</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Food & Drink">Food & Drink</option>
+                                    <option value="Health & Beauty">Health & Beauty</option>
                                     <option value="Miscellaneous">Miscellaneous</option>
-                                    <input type="submit" name="deal_category" value="<?php
+                                    <option value="Music, Movies & Games">Music, Movies & Games</option>
+                                    <option value="Pubs">Pubs</option>
+                                    <option value="Restaurants">Restaurants</option>
+                                    <input type="submit" style="color: transparent; background-color: transparent;" name="deal_category" value="<?php
                                     if (isset($_POST) && isset($_POST['deal_category'])) {
                                         echo $_POST['deal_category'];
                                     }
                                     ?>" />
                                     <span id="dealCategoryError" class="error">
-                                    <?php
-                                    if (isset($errorMessage) && isset($errorMessage['dealCategoryError'])) {
-                                        echo $errorMessage['dealCategoryError'];
-                                    }
-                                    ?>
-                                </span>
+                                        <?php
+                                        if (isset($errorMessage) && isset($errorMessage['dealCategoryError'])) {
+                                            echo $errorMessage['dealCategoryError'];
+                                        }
+                                        ?>
+                                    </span>
                                 </select>
                             </td>
                         </tr>
@@ -187,9 +202,9 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                 <div class = "bottom col-md-3 col-xs-6">
                     <ul class="footer navbar-nav">
                         <h3>FIND US HERE</h3>
-                        <li><img src="img/fbicon.png" onmouseover="this.src='img/fbiconfloat.png'" onmouseout="this.src='img/fbicon.png'" /></li>
-                        <li><img src="img/instaicon.png" onmouseover="this.src='img/instaiconfloat.png'" onmouseout="this.src='img/instaicon.png'" /></li>
-                        <li><img src="img/twittericon.png" onmouseover="this.src='img/twittericonfloat.png'" onmouseout="this.src='img/twittericon.png'" /></li>
+                        <li><img src="img/fbicon.png" onmouseover="this.src = 'img/fbiconfloat.png'" onmouseout="this.src = 'img/fbicon.png'" /></li>
+                        <li><img src="img/instaicon.png" onmouseover="this.src = 'img/instaiconfloat.png'" onmouseout="this.src = 'img/instaicon.png'" /></li>
+                        <li><img src="img/twittericon.png" onmouseover="this.src = 'img/twittericonfloat.png'" onmouseout="this.src = 'img/twittericon.png'" /></li>
                     </ul>
                 </div>
 

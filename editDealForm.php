@@ -12,6 +12,17 @@ if ($id == "") {
 require 'ensureUserLoggedIn.php';
 $username = $_SESSION['user_id'];
 
+if (isset($_GET) && isset($_GET['sortOrder'])) {
+    $sortOrder = $_GET['sortOrder'];
+    $columnNames = array("businessID", "business_name", "business_address", "business_lat", "business_long", "business_type");
+    if (!in_array($sortOrder, $columnNames)) {
+        $sortOrder = 'businessID';
+    }
+}
+else {
+    $sortOrder = 'businessID';
+}
+
 if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
@@ -23,7 +34,7 @@ $gateway = new DealTableGateway($connection);
 
 $businessGateway = new BusinessTableGateway($connection);
 
-$businesses = $businessGateway->getBusinessByUserId($username);
+$businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
 
 $statement = $gateway->getDealById($dealId);
 if ($statement->rowCount() !== 1) {
@@ -61,10 +72,10 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> 
-                            <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>
+<!--                        <li><a href="index.php">Home</a></li>                    
+                            <li><a href="#">Services</a></li> -->
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
                         </ul> 
                     </div>
@@ -72,7 +83,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
             </nav> 
         </div>
 
-        <div class = "row">
+<!--        <div class = "row">
             <div class="container">
                 <div class = "options col-md-6 col-xs-6">
                     <center>
@@ -88,6 +99,15 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
                     </center>
+                </div>
+            </div>
+        </div>-->
+        
+        <div class = "row">
+            <div class="welcome">
+                <div class="container">
+                    <h1><?php  
+                    echo $row['deal_description']; ?></h1>
                 </div>
             </div>
         </div>
@@ -122,13 +142,17 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             <td>
                                 <select name="deal_category">
                                     <option value="-1">....</option>
-                                    <option value="Clothing">Clothing</option>
-                                    <option value="Food & Drink">Food & Drink</option>
-                                    <option value="Pubs">Pubs</option>
+                                    <option value="Café">Café</option>
+                                    <option value="Clothes & Fashion">Clothes & Fashion</option>
                                     <option value="Electronics">Electronics</option>
-                                    <option value="Movies, Games & Music">Movies, Games & Music</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Food & Drink">Food & Drink</option>
+                                    <option value="Health & Beauty">Health & Beauty</option>
                                     <option value="Miscellaneous">Miscellaneous</option>
-                                    <input type="submit" name="deal_category" value="<?php
+                                    <option value="Music, Movies & Games">Music, Movies & Games</option>
+                                    <option value="Pubs">Pubs</option>
+                                    <option value="Restaurants">Restaurants</option>
+                                    <input type="submit" style="color: transparent; background-color: transparent;" name="deal_category" value="<?php
                                     if (isset($_POST) && isset($_POST['deal_category'])) {
                                         echo $_POST['deal_category'];
                                     }

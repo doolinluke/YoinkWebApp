@@ -65,17 +65,17 @@ $deals = $dealGateway->getDealByBusinessId($bId);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> 
-                            <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>
+<!--                        <li><a href="index.php">Home</a></li>                    
+                            <li><a href="#">Services</a></li> -->
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
-                        </ul> 
+                        </ul>
                     </div>
                 </div>
             </nav> 
         </div>
-        <div class = "row">
+<!--        <div class = "row">
             <div class="container">
                 <div class = "options col-md-6 col-xs-6">
                     <center>
@@ -92,16 +92,21 @@ $deals = $dealGateway->getDealByBusinessId($bId);
                     </center>
                 </div>
             </div>
+        </div>-->
+        
+        <div class = "row">
+            <div class="welcome">
+                <div class="container">
+                    <h1><?php
+                    $row = $statement->fetch(PDO::FETCH_ASSOC); 
+                    echo $row['business_name']; ?></h1>
+                </div>
+            </div>
         </div>
         <div class="container">
             <table class="table table-bordered table-responsive">
                 <tbody>
                     <?php
-                    $row = $statement->fetch(PDO::FETCH_ASSOC);
-                    echo '<tr>';
-                    echo '<th>Business ID</th>'
-                    . '<td>' . $row['businessID'] . '</td>';
-                    echo '</tr>';
                     echo '<tr>';
                     echo '<th>Business Name</th>'
                     . '<td>' . $row['business_name'] . '</td>';
@@ -168,7 +173,7 @@ $deals = $dealGateway->getDealByBusinessId($bId);
                         </tbody>
                     </table>
                 <?php } else { ?>
-                    <p>There are no patients assigned to this ward.</p>
+                    <p>There are no deals assigned to this business.</p>
                 <?php } ?>
             </div>
         </div>

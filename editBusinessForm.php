@@ -29,12 +29,13 @@ if ($statement->rowCount() !== 1) {
 }
 $row = $statement->fetch(PDO::FETCH_ASSOC);
 ?>
-<!DOCTYPE html>
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1-transitional.dtd>
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
         <meta charset="UTF-8">
         <script type="text/javascript" src="Javascript/business.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3kPZdtcJcP3EuDFpPNU3iIfAh0q-X6Gc&libraries=places"></script>
         <title>Medical Centre</title>
         <meta charset="utf-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -59,18 +60,18 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> 
-                            <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>
+<!--                        <li><a href="index.php">Home</a></li>                    
+                            <li><a href="#">Services</a></li> -->
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
-                        </ul> 
+                        </ul>
                     </div>
                 </div>
             </nav> 
         </div>
 
-        <div class = "row">
+<!--        <div class = "row">
             <div class="container">
                 <div class = "options col-md-6 col-xs-6">
                     <center>
@@ -85,6 +86,15 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
                         <h4>Deals</h4>
                     </center>
+                </div>
+            </div>
+        </div>-->
+
+        <div class = "row">
+            <div class="welcome">
+                <div class="container">
+                    <h1><?php  
+                    echo $row['business_name']; ?></h1>
                 </div>
             </div>
         </div>
@@ -115,7 +125,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td>Address</td>
                             <td>
-                                <input type="text" name="business_address" value="<?php
+                                <input type="text" name="business_address" onKeyPress="return disableEnterKey(event)" id="txtautocomplete" value="<?php
                                 if (isset($_POST) && isset($_POST['business_address'])) {
                                     echo $_POST['business_address'];
                                 } else
@@ -133,7 +143,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td>Latitude</td>
                             <td>
-                                <input type="text" name="business_lat" value="<?php
+                                <input type="text" name="business_lat" id="lblresultLat" value="<?php
                                 if (isset($_POST) && isset($_POST['business_lat'])) {
                                     echo $_POST['business_lat'];
                                 } else
@@ -151,7 +161,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td>Longitude</td>
                             <td>
-                                <input type="text" name="business_long" value="<?php
+                                <input type="text" name="business_long" id="lblresultLng" value="<?php
                                 if (isset($_POST) && isset($_POST['business_long'])) {
                                     echo $_POST['business_long'];
                                 } else
@@ -169,19 +179,30 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td>Business Type</td>
                             <td>
-                                <input type="text" name="business_type" value="<?php
-                                if (isset($_POST) && isset($_POST['business_type'])) {
-                                    echo $_POST['business_type'];
-                                } else
-                                    echo $row['business_type']
+                                <select name="business_type">
+                                    <option value="Café">Café</option>
+                                    <option value="Clothes & Fashion">Clothes & Fashion</option>
+                                    <option value="Electronics">Electronics</option>
+                                    <option value="Entertainment">Entertainment</option>
+                                    <option value="Food & Drink">Food & Drink</option>
+                                    <option value="Health & Beauty">Health & Beauty</option>
+                                    <option value="Miscellaneous">Miscellaneous</option>
+                                    <option value="Music, Movies & Games">Music, Movies & Games</option>
+                                    <option value="Pubs">Pubs</option>
+                                    <option value="Restaurants">Restaurants</option>
+                                    <input type="submit" style="color: transparent; background-color: transparent;" name="business_type" value="<?php
+                                    if (isset($_POST) && isset($_POST['business_type'])) {
+                                        echo $_POST['business_type'];
+                                    }
                                     ?>" />
-                                <span id="phoneNumberError" class="error">
+                                    <span id="dealCategoryError" class="error">
                                     <?php
-                                    if (isset($errorMessage) && isset($errorMessage['business_type'])) {
-                                        echo $errorMessage['business_type'];
+                                    if (isset($errorMessage) && isset($errorMessage['dealCategoryError'])) {
+                                        echo $errorMessage['dealCategoryError'];
                                     }
                                     ?>
                                 </span>
+                                </select>
                             </td>
                         </tr>
                         <tr>
@@ -238,5 +259,38 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
         <script>
             $('a.btn-info').tooltip();
         </script>
+        <script type="text/javascript">
+                google.maps.event.addDomListener(window, 'load', initialize);
+                function initialize() {
+                    var autocomplete = new google.maps.places.Autocomplete(document.getElementById('txtautocomplete'));
+                    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                        var places = autocomplete.getPlace();
+                        var location ='<b>Location:</b>'+ places.formatted_address + "<br/>";
+                        var localLat= places.geometry.location.lat();
+                        //var location2 ='<b>Location:</b>'+ places.formatted_address + "<br/>";
+                        var localLng =places.geometry.location.lng();
+                        document.getElementById('lblresultLat').value = localLat;
+                        document.getElementById('lblresultLng').value = localLng;
+                        console.log(localLng + "" + localLat);
+                        
+                        return localLng
+                });
+                
+                }
+            </script>
+            <script language="JavaScript">
+                function disableEnterKey(e)
+                {
+                    var key;
+                    if (window.event)
+                        key = window.event.keyCode;
+                    else
+                        key = e.which;
+                    if (key == 13)
+                        return false;
+                    else
+                        return true;
+                }
+            </script>
     </body>
 </html>
