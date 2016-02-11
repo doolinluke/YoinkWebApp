@@ -11,6 +11,8 @@ if ($id == "") {
 
 $userId = $_SESSION['user_id'];
 
+echo['business_lat'];
+
 require 'ensureUserLoggedIn.php';
 
 $connection = Connection::getInstance();

@@ -26,7 +26,7 @@ if (isset($_GET) && isset($_GET['filterName'])) {
 
 $connection = Connection::getInstance();
 $gateway = new BusinessTableGateway($connection);
-$statement = $gateway->getBusinessByUserId($username);
+$statement = $gateway->getBusinessByUserId($username, $sortOrder);
 
 ?>
 <!DOCTYPE html>
@@ -50,7 +50,6 @@ $statement = $gateway->getBusinessByUserId($username);
         </script>-->
     </head>
     <body>
-        <?php require 'toolbar.php' ?>
         <div class="row"> 
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">

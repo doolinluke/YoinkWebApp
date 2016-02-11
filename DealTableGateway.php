@@ -171,4 +171,25 @@ class DealTableGateway {
 
         return $statement;
 }
+
+public function getDealByBusinessId($bId) {
+        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+        $sqlQuery = "SELECT d.*, u.username AS username, b.business_name 
+                FROM Deal d 
+                LEFT JOIN users u ON u.id = d.userId 
+                LEFT JOIN business b ON d.businessId = b.businessID 
+                WHERE b.businessID = :businessID";
+
+        $params = array(
+            "businessID" => $bId
+        );
+        $statement = $this->connection->prepare($sqlQuery);
+        $status = $statement->execute($params);
+
+        if (!$status) {
+            die("Could not retrieve Deal");
+        }
+
+        return $statement;
+}
 }

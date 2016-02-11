@@ -22,7 +22,6 @@ $businessGateway = new BusinessTableGateway($connection);
 $businessGateway2 = new BusinessTableGateway($connection);
 
 $deals = $dealGateway->getDealById($dealId);
-$businesses = $businessGateway->getBusinessById($bId);
 $businessDeal = $businessGateway2->getBusinessByDealId($dealId);
 ?>
 <!DOCTYPE html>
@@ -40,8 +39,6 @@ $businessDeal = $businessGateway2->getBusinessByDealId($dealId);
         <script src="js/respond.js"></script>
     </head>
     <body>
-        <!--<?php require 'toolbar.php' ?>-->
-        <?php require 'mainMenu.php' ?>
         <?php
         if (isset($errorMessage)) {
             echo '<p>Error: ' . $errorMessage . '</p>';

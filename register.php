@@ -1,21 +1,30 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
-        <title>My Website</title>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+        <meta charset="UTF-8">
+        <script type="text/javascript" src="Javascript/business.js"></script>
+        <title>Medical Centre</title>
+        <meta charset="utf-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/custom.css" rel="stylesheet">
         <script src="js/respond.js"></script>
-        <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
+<!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&callback=initMap"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&libraries=places"></script>
+        <script src ="http://maps.googleapis.com/maps/api/geocode/output?parameters"></script>
+        <script type ="text/javascript">
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>-->
     </head>
     <body>
+        <?php require 'toolbar.php' ?>
         <div class="row"> 
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/newlogo.png" alt="" class="img-responsive"></p>
+                        <p><a href="home.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -30,8 +39,7 @@
                             <li><a href="#">Services</a></li> 
                             <li><a href="#">Book</a></li>
                             <li><a href="#">Contact</a></li>
-                            <li><a class="btn btn-signin btn-xs" href="login.php">Sign In</a></li>
-                            <li></li>
+                            <li class=""><?php require 'toolbar.php' ?></li>
                         </ul> 
                     </div>
                 </div>
@@ -109,7 +117,7 @@
                 </table>
             </div>
         </form>
-        <div class="footerGroup navbar-fixed-bottom">
+        <div class="footerGroup navbar">
             <div class = "row">
                 <div class="row3">
                     <div class = "bottom col-md-3 col-xs-6">

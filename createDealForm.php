@@ -171,9 +171,14 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                                 </select>
                             </td>
                         </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="submit" class="btn btn-info" value="Submit">
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
-                <input type="submit" class="btn btn-info" value="Submit">
             </div>
         </form>
 
@@ -182,7 +187,9 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                 <div class = "bottom col-md-3 col-xs-6">
                     <ul class="footer navbar-nav">
                         <h3>FIND US HERE</h3>
-                        <li><img src="img/fbicon.png" alt="" class="img-responsive"></li>                    
+                        <li><img src="img/fbicon.png" onmouseover="this.src='img/fbiconfloat.png'" onmouseout="this.src='img/fbicon.png'" /></li>
+                        <li><img src="img/instaicon.png" onmouseover="this.src='img/instaiconfloat.png'" onmouseout="this.src='img/instaicon.png'" /></li>
+                        <li><img src="img/twittericon.png" onmouseover="this.src='img/twittericonfloat.png'" onmouseout="this.src='img/twittericon.png'" /></li>
                     </ul>
                 </div>
 
@@ -196,7 +203,7 @@ $businesses = $businessGateway->getBusinessByUserId($username);
                     <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
                     <p>84 Ranelagh Road, Ranelagh, D6</p>
                     <p>Phone: 0871234567</p>
-                    <p>ranelaghmedcentre@gmail.com</p>
+                    <p>yoink@gmail.com</p>
                 </div>
 
                 <div class = "bottom col-md-3 col-xs-6">
@@ -210,7 +217,7 @@ $businesses = $businessGateway->getBusinessByUserId($username);
 
         <div class="row">
             <div class = "footerBar col-md-12 col-xs-12">
-                <p>© Ranelagh Medical Centre. All rights reserved.</p>
+                <p>© YOINK! 2016. All rights reserved.</p>
             </div>
         </div>
         <!-- javascript -->

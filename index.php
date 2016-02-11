@@ -78,11 +78,21 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
+                    <img src="img/shopper.png" alt="">
+                    <div class="carousel-caption">
+                        <center><h1>YOINK!</h1>
+                            <p>Yoink! finds you your new best customers</p>
+                            <p>and walks them right through the door</p>
+                            <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
+                    </div>
+                </div>
+                
+                <div class="item">
                     <img src="img/diners.png" alt="">
                     <div class="carousel-caption">
                         <center><h1>YOINK!</h1>
                             <p>Yoink! is the perfect shopping pal for finding the deals you want</p>
-                            <p>current, dynamic, and always on trend</p>
+                            <p>Current, dynamic, and always on trend</p>
                             <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
                     </div>
                 </div>
@@ -96,6 +106,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                             <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
                     </div>
                 </div>
+                
             </div>
 
             <!-- Left and right controls -->

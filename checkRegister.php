@@ -48,12 +48,14 @@ if ($password2 === FALSE || $password2 === '') {
 if (empty($errorMessage)) {
     $gateway->insertUser($username, $password);
     $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = $row['id'];
     header('Location: home.php');
 }
 
 /* Sent back to register if the above fails */ else {
     require 'register.php';
 }
+
 
 
 

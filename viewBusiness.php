@@ -2,6 +2,7 @@
 require_once 'Business.php';
 require_once 'Connection.php';
 require_once 'BusinessTableGateway.php';
+require_once 'DealTableGateway.php';
 
 $id = session_id();
 if ($id == "") {
@@ -28,9 +29,11 @@ $bId = $_GET['id'];
 
 $connection = Connection::getInstance();
 $gateway = new BusinessTableGateway($connection);
+$dealGateway = new DealTableGateway($connection);
 
 
 $statement = $gateway->getBusinessById($bId);
+$deals = $dealGateway->getDealByBusinessId($bId);
 ?>
 <!DOCTYPE html>
 <html>
@@ -47,13 +50,6 @@ $statement = $gateway->getBusinessById($bId);
         <script src="js/respond.js"></script>
     </head>
     <body>
-        <!--<?php require 'toolbar.php' ?>-->
-        <?php require 'mainMenu.php' ?>
-        <?php
-        if (isset($errorMessage)) {
-            echo '<p>Error: ' . $errorMessage . '</p>';
-        }
-        ?> 
         <div class="row"> 
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
@@ -135,6 +131,46 @@ $statement = $gateway->getBusinessById($bId);
                     ?>
                 </tbody>
             </table>
+        </div>
+        
+        <div class="row2 col-lg-12">
+            <div class="container">
+                <div class="tour col-lg-12">
+                    <h1>Deals assigned to <?php echo $row['business_name']; ?></h1>
+                </div>
+                <?php if ($deals->rowCount() !== 0) { ?>
+                    <table class="table table-bordered table-responsive">
+                        <thead>
+                            <tr>
+                                <th>Deal Description</th>
+                                <th>Deal Category</th>
+                                <th>Business</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $row = $deals->fetch(PDO::FETCH_ASSOC);
+                            while ($row) {
+                                echo '<td>' . $row['deal_description'] . '</td>';
+                                echo '<td>' . $row['deal_category'] . '</td>';
+                                echo '<td>' . $row['business_name'] . '</td>';
+                                echo '<td>'
+                                . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $row['dealId'] . '">View</a> '
+                                . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $row['dealId'] . '">Edit</a> '
+                                . '<a class="deletePatient" href="deleteDeal.php?id=' . $row['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
+                                . '</td>';
+                                echo '</tr>';
+
+                                $row = $deals->fetch(PDO::FETCH_ASSOC);
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                <?php } else { ?>
+                    <p>There are no patients assigned to this ward.</p>
+                <?php } ?>
+            </div>
         </div>
 
         <div class = "row">

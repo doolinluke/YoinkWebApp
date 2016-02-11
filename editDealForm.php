@@ -16,7 +16,7 @@ if (!isset($_GET) || !isset($_GET['id'])) {
     die('Invalid request');
 }
 $dealId = $_GET['id'];
-//$_SESSION['id'] = $dealId;
+$_SESSION['id'] = $dealId;
 
 $connection = Connection::getInstance();
 $gateway = new DealTableGateway($connection);
@@ -46,13 +46,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
         <script src="js/respond.js"></script>
     </head>
     <body>
-        <!--<?php require 'toolbar.php' ?>-->
-        <?php require 'mainMenu.php' ?>
-        <?php
-        if (isset($errorMessage)) {
-            echo '<p>Error: ' . $errorMessage . '</p>';
-        }
-        ?> 
         <div class="row"> 
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
@@ -165,11 +158,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                                 </select>
                             </td>
                         </tr>
-                          <?php 
-                            $dealId = $_SESSION['id'];
-                            echo $dealId;   
-                                    ?>
-                                    
                         <tr>
                             <td></td>
                             <td>
