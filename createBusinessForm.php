@@ -43,7 +43,7 @@ $businesses = $businessGateway->getBusinesses();
                                         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                                             <div class="container">
                                                 <div class="navbar-brand">
-                                                    <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
+                                                    <p><a href="index.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                                                 </div>
                                                 <div class="navbar-header">
                                                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">

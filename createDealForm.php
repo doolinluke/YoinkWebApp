@@ -55,7 +55,7 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
+                        <p><a href="index.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -96,13 +96,12 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
                 </div>
             </div>
         </div>-->
-        <div class = "row">
-            <div class="welcome">
-                <div class="container">
-                    <h1>Create New Deal</h1>
-                </div>
+        <div class="welcome">
+            <div class="container">
+                <h1>Create New Deal</h1>
             </div>
         </div>
+
         <form action="createDeal.php" method="POST" id="createDealForm">
             <div class="container">
                 <table class="table table-bordered">                

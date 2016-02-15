@@ -54,7 +54,7 @@ $statement = $gateway->getBusinessByUserId($username, $sortOrder);
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><a href="home.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
+                        <p><a href="index.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">

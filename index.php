@@ -43,7 +43,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
                     <div class="navbar-brand">
-                        <p><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></p>
+                        <p><a href="index.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                     </div>
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
@@ -59,6 +59,8 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                             <li><a href="#">Book</a></li>
                             <li><a href="#">Contact</a></li>
                             <li><a href="home.php">Admin</a></li>-->
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
                         </ul> 
                     </div>
