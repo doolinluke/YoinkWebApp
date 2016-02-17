@@ -33,9 +33,9 @@ $deals = $dealGateway->getDealByUserId($username);
         <meta charset="utf-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
-        <script src="js/respond.js"></script>
+        <link href="CSS/bootstrap.min.css" rel="stylesheet">
+        <link href="CSS/custom.css" rel="stylesheet">
+        <script src="Javascript/respond.js"></script>
     </head>
     <body>
         <!--<?php require 'toolbar.php' ?>-->
@@ -59,8 +59,6 @@ $deals = $dealGateway->getDealByUserId($username);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-<!--                        <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> -->
                             <li><a href="home.php">Businesses</a></li> 
                             <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
@@ -69,25 +67,6 @@ $deals = $dealGateway->getDealByUserId($username);
                 </div>
             </nav> 
         </div>
-
-<!--        <div class = "row">
-            <div class="container">
-                <div class = "options col-md-6 col-xs-6">
-                    <center>
-                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
-                        <h4>Businesses</h4>
-                    </center>
-                    
-                </div>
-
-                <div class = "options col-md-6 col-xs-6">
-                    <center>
-                        <a href="viewDeals.php"><img src="img/dealFloat.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/dealFloat.png'" /></a>
-                        <h4>Deals</h4>
-                    </center>
-                </div>
-            </div>
-        </div>-->
 
         <div class="welcome">
             <div class="container">

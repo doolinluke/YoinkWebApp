@@ -7,7 +7,7 @@ class Business {
     private $business_long;
     private $business_type;
     
-    /*Contructor for attributes of the Patient class*/
+    /*Contructor for attributes of the Business class*/
     public function __construct($bId, $bN, $bA, $bLt, $bLg, $bT) {
         $this->businessId = $bId;
         $this->business_name = $bN;
@@ -17,7 +17,7 @@ class Business {
         $this->business_type = $bT;
     }
     
-    /*Gets values entered in createPatient and returns them to the instances*/
+    /*Gets values entered in createBusiness and returns them to the instances*/
     public function getBusinessID() { return $this->businessId; }
     public function getBusinessName() { return $this->business_name; }
     public function getBusinessAddress() { return $this->business_address; }

@@ -3,26 +3,6 @@ require_once 'Business.php';
 require_once 'Connection.php';
 require_once 'BusinessTableGateway.php';
 
-/*if (isset($_GET) && isset($_GET['sortOrder'])) {
-    $sortOrder = $_GET['sortOrder'];
-    $columnNames = array("businessID", "business_name", "business_address", "business_lat", "business_long", "business_type");
-    if (!in_array($sortOrder, $columnNames)) {
-        $sortOrder = 'businessID';
-    }
-} else {
-    $sortOrder = 'businessID';
-}
-
-if (isset($_GET) && isset($_GET['filterName'])) {
-    $filterName = filter_input(INPUT_GET, 'filterName', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-} else {
-    $filterName = NULL;
-}
-
-$connection = Connection::getInstance();
-$gateway = new BusinessTableGateway($connection);
-
-$statement = $gateway->getBusinesses($sortOrder, $filterName);*/
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,9 +11,9 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
         <title>My Website</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
-        <script src="js/respond.js"></script>
+        <link href="CSS/bootstrap.min.css" rel="stylesheet">
+        <link href="CSS/custom.css" rel="stylesheet">
+        <script src="Javascript/respond.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -85,7 +65,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                         <center><h1>YOINK!</h1>
                             <p>Yoink! finds you your new best customers</p>
                             <p>and walks them right through the door</p>
-                            <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
+                            <a class="btn btn-primary btn-large" href="register.php">Join Us Now</a></center>
                     </div>
                 </div>
                 
@@ -98,9 +78,8 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                             <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
                     </div>
                 </div>
-
                 <div class="item">
-                    <img src="img/shopper.png" alt="">
+                    <img src="img/coffee.png" alt="">
                     <div class="carousel-caption">
                         <center><h1>YOINK!</h1>
                             <p>Yoink! finds you your new best customers</p>
@@ -108,7 +87,15 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                             <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
                     </div>
                 </div>
-                
+                <div class="item">
+                    <img src="img/table.png" alt="">
+                    <div class="carousel-caption">
+                        <center><h1>YOINK!</h1>
+                            <p>Yoink! finds you your new best customers</p>
+                            <p>and walks them right through the door</p>
+                            <a class="btn btn-primary btn-large" href="#">Join Us Now</a></center>
+                    </div>
+                </div>
             </div>
 
             <!-- Left and right controls -->
@@ -120,6 +107,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                 <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
                 <span class="sr-only">Next</span>
             </a>
+            
         </div>
 
         <div class="row2 col-lg-12">
@@ -208,7 +196,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
                     <h3>JOIN OUR MAILING LIST</h3>
                     <p>Enter you email address to keep up to date with new membership offers.</p>
                     <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
-                    <a class="btn btn-primary btn-large" href="#">Subscribe</a>
+                    <a class="btn btn-primary btn-small" href="#">Subscribe</a>
                 </div>
             </div>
         </div>
@@ -220,7 +208,7 @@ $statement = $gateway->getBusinesses($sortOrder, $filterName);*/
         </div>
         <!-- javascript -->
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="Javascript/bootstrap.min.js"></script>
         <script>
             $('a.btn-info').tooltip()
         </script>

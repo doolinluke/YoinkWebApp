@@ -8,57 +8,7 @@ class BusinessTableGateway {
         $this->connection = $c;
     }
 
-    /* public function getBusinesses($sortOrder, $filterName) {
-      // execute a query to get all businesss and sort by first name and to display the ward name instead of wardId by using a join where wardId in businesss = wardId in ward
-      $sqlQuery = "SELECT b.*, d.deal_description AS deal_description
-      FROM business b
-      LEFT JOIN Deal d ON d.dealID = b.dealID " .
-      (($filterName == NULL) ? "" : "WHERE b.business_name LIKE :filterName") .
-      " ORDER BY " . $sortOrder;
-
-      $statement = $this->connection->prepare($sqlQuery);
-      if($filterName != NULL) {
-      $params = array(
-      "filterName" => "%" . $filterName . "%"
-      );
-      $status = $statement->execute($params);
-      }
-      else {
-      $status = $statement->execute();
-      }
-
-      if (!$status) {
-      die("Could not retrieve businesses");
-      }
-
-      return $statement;
-      } */
-
-    /* public function getBusinesses($sortOrder, $filterName) {
-      // execute a query to get all businesss and sort by first name and to display the ward name instead of wardId by using a join where wardId in businesss = wardId in ward
-      $sqlQuery = "SELECT * FROM Business " .
-      " ORDER BY " . $sortOrder;
-
-      $statement = $this->connection->prepare($sqlQuery);
-      if($filterName != NULL) {
-      $params = array(
-      "filterName" => "%" . $filterName . "%"
-      );
-      $status = $statement->execute($params);
-      }
-      else {
-      $status = $statement->execute();
-      }
-
-      if (!$status) {
-      die("Could not retrieve businesses");
-      }
-
-      return $statement;
-      } */
-
     public function getBusinesses() {
-        // execute a query to get all businesss and sort by first name and to display the ward name instead of wardId by using a join where wardId in businesss = wardId in ward
         $sqlQuery = "SELECT * FROM Business ";
 
         $statement = $this->connection->prepare($sqlQuery);
@@ -70,29 +20,9 @@ class BusinessTableGateway {
 
         return $statement;
     }
-
-//    public function getBusinessByDealId($dealID) {
-//        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
-//        $sqlQuery = "SELECT b.business_name AS business_name
-//                    FROM business b
-//                    LEFT JOIN deal d ON d.businessId = b.businessID
-//                    WHERE d.dealId = :dealID";
-//
-//        $params = array(
-//            "dealID" => $dealID
-//        );
-//        $statement = $this->connection->prepare($sqlQuery);
-//        $status = $statement->execute($params);
-//
-//        if (!$status) {
-//            die("Could not retrieve Deal");
-//        }
-//
-//        return $statement;
-//    }
     
     public function getBusinessByDealId($dealId) {
-        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+        // execute a query to get Business assigned to a specific deal
         $sqlQuery = "SELECT b.business_name AS business_name
                     FROM business b
                     LEFT JOIN deal d ON d.businessId = b.businessID
@@ -112,7 +42,7 @@ class BusinessTableGateway {
     }
 
     public function getBusinessById($bId) {
-        // execute a query to get the user with the specified id
+        // execute a query to get the Business with the specified id
         $sqlQuery = "SELECT * FROM business WHERE businessID = :id";
 
         $statement = $this->connection->prepare($sqlQuery);
@@ -129,34 +59,34 @@ class BusinessTableGateway {
         return $statement;
     }
 
-    public function getBusinessByUserId($uId, $sortOrder) {
+    public function getBusinessByUserId($uId) {
         // execute a query to get the user with the specified id
-        $sqlQuery = "SELECT * FROM business WHERE userId = :id" .
-                    " ORDER BY " . $sortOrder;
+        $sqlQuery = "SELECT * FROM business WHERE userId = :id";
 
+        
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
             "id" => $uId
         );
+       
 
         $status = $statement->execute($params);
-
+      
         if (!$status) {
             die("Could not retrieve business");
         }
 
         return $statement;
     }
+    
+  
+    
 
 
     public function insertBusiness($bN, $bA, $bL, $bLg, $bT, $uId) {
         $sqlQuery = "INSERT INTO business " .
                 "(business_name, business_address, business_lat, business_long, business_type, userId) " .
                 "VALUES (:business_name, :business_address, :business_lat, :business_long, :business_type, :userId)";
-
-        //if ($wID == -1) {
-        //$wID = NULL;
-        //}
 
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
@@ -223,14 +153,7 @@ class BusinessTableGateway {
             "business_long" => $bLg,
             "business_type" => $bT
         );
-
-        /* echo '<pre>';
-          print_r ($_POST);
-          print_r ($params);
-          print_r ($sqlQuery);
-          echo '</pre>'; */
-
-
+        
         $status = $statement->execute($params);
 
         return ($statement->rowCount() == 1);

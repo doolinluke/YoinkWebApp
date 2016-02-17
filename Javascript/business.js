@@ -8,13 +8,13 @@ window.onload = function () {
         createBusinessForm.addEventListener('submit', validateBusinessForm);
     }
     
-    /*function validateBusinessForm(event) {
-        var form = event.target;
-
-        if (!confirm("Is the form data correct?")) {
-            event.preventDefault();
-        }
-    }*/
+//    function validateBusinessForm(event) {
+//        var form = event.target;
+//
+//        if (!confirm("Is the form data correct?")) {
+//            event.preventDefault();
+//        }
+//    }
 
     function validateBusinessForm(event) {
         var form = event.target;
@@ -33,19 +33,19 @@ window.onload = function () {
         var errors = new Object();
 
         if (business_name === "") {
-            errors["business_name"] = "Please enter first name.\n";
+            errors["business_name"] = "Please enter name of business.\n";
         }
         if (business_address === "") {
-            errors["business_address"] = "Please enter second name.\n";
+            errors["business_address"] = "Please enter business address.\n";
         }
         if (business_lat === "") {
-            errors["business_lat"] = "Please enter address\n";
+            errors["business_lat"] = "Please enter latitude\n";
         }
         if (business_long === "") {
-            errors["business_long"] = "Please enter mobile number\n";
+            errors["business_long"] = "Please enter longitude\n";
         }
         if (business_type === "") {
-            errors["business_type"] = "Please enter email address\n";
+            errors["business_type"] = "Please enter business type\n";
         }
         
         var valid = true;
@@ -62,7 +62,7 @@ window.onload = function () {
     }
 
     //-------------------------------------------------------------------------
-    // define an event listener for the '#createProgrammerForm'
+    // define an event listener for the '#createBusinessForm'
     //-------------------------------------------------------------------------
     var editBusinessForm = document.getElementById('editBusinessForm');
     if (editBusinessForm !== null) {
@@ -70,7 +70,7 @@ window.onload = function () {
     }
 
     //-------------------------------------------------------------------------
-    // define an event listener for any '.deleteProgrammer' links
+    // define an event listener for any '.deleteBusiness' links
     //-------------------------------------------------------------------------
     var deleteLinks = document.getElementsByClassName('deleteBusiness');
     for (var i = 0; i !== deleteLinks.length; i++) {

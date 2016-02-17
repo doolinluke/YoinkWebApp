@@ -36,13 +36,13 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
         <meta charset="UTF-8">
         <script type="text/javascript" src="Javascript/business.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3kPZdtcJcP3EuDFpPNU3iIfAh0q-X6Gc&libraries=places"></script>
-        <title>Medical Centre</title>
+        <title>Yoink!</title>
         <meta charset="utf-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
-        <script src="js/respond.js"></script>
+        <link href="CSS/bootstrap.min.css" rel="stylesheet">
+        <link href="CSS/custom.css" rel="stylesheet">
+        <script src="Javascript/respond.js"></script>
     </head>
     <body>
         <div class="row"> 
@@ -60,8 +60,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-<!--                        <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> -->
                             <li><a href="home.php">Businesses</a></li> 
                             <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
@@ -70,25 +68,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                 </div>
             </nav> 
         </div>
-
-<!--        <div class = "row">
-            <div class="container">
-                <div class = "options col-md-6 col-xs-6">
-                    <center>
-                        <a href="home.php"><img src="img/company.png" onmouseover="this.src='img/companyFloat.png'" onmouseout="this.src='img/company.png'" /></a>
-                        <h4>Businesses</h4>
-                    </center>
-                    
-                </div>
-
-                <div class = "options col-md-6 col-xs-6">
-                    <center>
-                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
-                        <h4>Deals</h4>
-                    </center>
-                </div>
-            </div>
-        </div>-->
+        
         <div class = "row">
             <div class="welcome">
                 <div class="container">
@@ -216,6 +196,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                 </table>
             </form>
         </div>
+
         <div class = "row">
             <div class="row3">
                 <div class = "bottom col-md-3 col-xs-6">

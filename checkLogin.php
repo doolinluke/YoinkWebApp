@@ -3,11 +3,25 @@
 require_once 'User.php';
 require_once 'Connection.php';
 require_once 'UserTableGateway.php';
+require_once 'BusinessTableGateway.php';
+require_once 'DealTableGateway.php';
 
 $connection = Connection::getInstance();
 
-$gateway = new UserTableGateway($connection);
+if (isset($_GET) && isset($_GET['sortOrder'])) {
+    $sortOrder = $_GET['sortOrder'];
+    $columnNames = array("businessID", "business_name", "business_address", "business_lat", "business_long", "business_type");
+    if (!in_array($sortOrder, $columnNames)) {
+        $sortOrder = 'businessID';
+    }
+}
+else {
+    $sortOrder = 'businessID';
+}
 
+$gateway = new UserTableGateway($connection);
+$businessGateway = new BusinessTableGateway($connection);
+$dealGateway = new DealTableGateway($connection);
 
 /* Starts new session if session doesn't already exist */
 $id = session_id();
@@ -30,7 +44,7 @@ if ($username === FALSE || $username === '') {
 if ($password === FALSE || $password === '') {
     $errorMessage['password'] = 'Password must not be blank<br/>';
 }
-
+/*Username not registered if getUserByUserName does not return a rowCount of 1*/
 if (empty($errorMessage)) {
     $statement = $gateway->getUserByUserName($username);
     if ($statement->rowCount() != 1) {
@@ -43,17 +57,24 @@ if (empty($errorMessage)) {
     }
 }
 
-if (empty($errorMessage)) {
+/*User sent to home page if rowCount shows that they have created at least 1 business*/
+/*If user has not created their first business they are sent to welcome page*/
+$business = $businessGateway->getBusinessByUserId($row['id']);
+if (empty($errorMessage) && $business->rowCount() > 0) {
     $_SESSION['username'] = $username;
     $_SESSION['user_id'] = $row['id'];
+    $_SESSION['numBus'] = $business->rowCount();
+    
     header("Location: home.php");
-} else {
+}
+else if (empty($errorMessage) && $business->rowCount() < 1) {       
+    $_SESSION['username'] = $username;
+    $_SESSION['user_id'] = $row['id'];
+    header("Location: welcome.php");
+}
+else {
     require 'index.php';
 }
-
-
-
-
 
 
 

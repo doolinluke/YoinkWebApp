@@ -9,7 +9,7 @@ class DealTableGateway {
     }
 
     public function getDeals() {
-        // execute a query to get all managers
+        // execute a query to get all deals
         $sqlQuery = "SELECT * FROM Deal";
 
         $statement = $this->connection->prepare($sqlQuery);
@@ -22,26 +22,8 @@ class DealTableGateway {
         return $statement;
     }
 
-    /* public function getDeals($sortOrder) {
-      // execute a query to get all patients
-      $sqlQuery = "SELECT p.*, w.dealName AS dealName
-      FROM patient p
-      LEFT JOIN deal w ON w.dealID = p.dealID
-      ORDER BY " . $sortOrder;
-
-      $statement = $this->connection->prepare($sqlQuery);
-
-      $status = $statement->execute($params);
-
-      if (!$status) {
-      die("Could not retrieve patients");
-      }
-
-      return $statement;
-      } */
-
     public function getDealById($dealId) {
-        // execute a query to get the manager with the specified id
+        // execute a query to get the deal with the specified id
         $sqlQuery = "SELECT * FROM deal WHERE dealId = :dealId";
 
         $statement = $this->connection->prepare($sqlQuery);
@@ -57,9 +39,9 @@ class DealTableGateway {
 
         return $statement;
     }
-    
+
     public function getDealAndBusiness($dealID) {
-        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+        // execute a query to get all deal details plus the business name associated to that deal
         $sqlQuery = "SELECT d.deal_description, d.deal_category, b.business_name AS Business
                     FROM business b 
                     LEFT JOIN deal d ON d.businessId = b.businessID 
@@ -128,7 +110,7 @@ class DealTableGateway {
                 "deal_category = :deal_category, " .
                 "businessId = :businessId " .
                 " WHERE dealId = :dealId";
- 
+
         $statement = $this->connection->prepare($sqlQuery);
         $params = array(
             "dealId" => $dId,
@@ -136,7 +118,7 @@ class DealTableGateway {
             "deal_category" => $dC,
             "businessId" => $bId
         );
-        
+
         echo '<pre>';
         print_r($params);
         print_r($statement);
@@ -152,7 +134,7 @@ class DealTableGateway {
     }
 
     public function getDealByUserId($uId) {
-        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+        // execute a query to get all deals assigned to a specific user
         $sqlQuery = "SELECT d.*, u.username AS username, b.business_name 
                 FROM Deal d 
                 LEFT JOIN users u ON u.id = d.userId 
@@ -170,10 +152,10 @@ class DealTableGateway {
         }
 
         return $statement;
-}
+    }
 
-public function getDealByBusinessId($bId) {
-        // execute a query to get all users assigned to a specific ward by using a join where wardId in businesss = wardId in ward
+    public function getDealByBusinessId($bId) {
+        // execute a query to get all deals assigned to a specific business by using a join where businessId in businesss = businessId in deal
         $sqlQuery = "SELECT d.*, u.username AS username, b.business_name 
                 FROM Deal d 
                 LEFT JOIN users u ON u.id = d.userId 
@@ -191,5 +173,6 @@ public function getDealByBusinessId($bId) {
         }
 
         return $statement;
-}
+    }
+
 }

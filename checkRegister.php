@@ -39,17 +39,20 @@ if ($password === FALSE || $password === '') {
 }
 
 if ($password2 === FALSE || $password2 === '') {
-    $errorMessage['password2'] = 'Password2 must not be blank<br/>';
+    $errorMessage['password2'] = 'Confirm password must not be blank<br/>';
 } else if ($password !== $password2) {
     $errorMessage['password2'] = 'Passwords must match<br/>';
 }
 
-/* Runs if error message is empty/all requirements met */
+/* Inserts user details into database and retreives details back to pass into the session */
+/*Sent to welcome page instead of home page*/
 if (empty($errorMessage)) {
     $gateway->insertUser($username, $password);
+    $statement = $gateway->getUserByUserName($username);
+    $row = $statement->fetch(PDO::FETCH_ASSOC);
     $_SESSION['username'] = $username;
     $_SESSION['user_id'] = $row['id'];
-    header('Location: home.php');
+    header('Location: welcome.php');
 }
 
 /* Sent back to register if the above fails */ else {

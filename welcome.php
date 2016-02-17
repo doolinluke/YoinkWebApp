@@ -2,10 +2,10 @@
 require_once 'Business.php';
 require_once 'Connection.php';
 require_once 'BusinessTableGateway.php';
-require_once 'checkRegister.php';
 
 require 'ensureUserLoggedIn.php';
-$userID = $_SESSION['user_id'];
+$userId = $_SESSION['user_id'];
+
 
 ?>
 <!DOCTYPE html>
@@ -21,12 +21,6 @@ $userID = $_SESSION['user_id'];
         <link href="CSS/bootstrap.min.css" rel="stylesheet">
         <link href="CSS/custom.css" rel="stylesheet">
         <script src="Javascript/respond.js"></script>
-<!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&callback=initMap"></script>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&libraries=places"></script>
-        <script src ="http://maps.googleapis.com/maps/api/geocode/output?parameters"></script>
-        <script type ="text/javascript">
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>-->
     </head>
     <body>
         <div class="row"> 
@@ -46,8 +40,7 @@ $userID = $_SESSION['user_id'];
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#"<?php
                             $username = $_SESSION['username'];
-                            $userID = $_SESSION['user_id'];
-                            echo '<h3>Welcome ' . $username . $userID . '</h3>';
+                            echo '<h3>Welcome ' . $username . $userId;
                             ?></a></li>
                             <li><a></a></li>                    
                             <li><a href="home.php">Businesses</a></li> 
@@ -62,7 +55,7 @@ $userID = $_SESSION['user_id'];
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="img/chefs.png" alt="">
+                    <img src="img/chefs2.png" alt="">
                     <div class="carousel-caption">
                         <center><h1>Welcome To Yoink!</h1>
                             <p>To get started with Yoink! click the button below to create your first business and then attach a deal to your business</p>  

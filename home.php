@@ -39,15 +39,15 @@ $statement = $gateway->getBusinessByUserId($username, $sortOrder);
         <meta charset="utf-8">  
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
-        <script src="js/respond.js"></script>
-<!--        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&callback=initMap"></script>
+        <link href="CSS/bootstrap.min.css" rel="stylesheet">
+        <link href="CSS/custom.css" rel="stylesheet">
+        <script src="Javascript/respond.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&callback=initMap"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbHIhlshSnY9ddWv58BBg23XvmkVAu03o&libraries=places"></script>
         <script src ="http://maps.googleapis.com/maps/api/geocode/output?parameters"></script>
         <script type ="text/javascript">
-            google.maps.event.addDomListener(window, 'load', initialize);
-        </script>-->
+        google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
     </head>
     <body>
         <div class="row"> 
@@ -67,7 +67,8 @@ $statement = $gateway->getBusinessByUserId($username, $sortOrder);
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="#"<?php
                             $username = $_SESSION['username'];
-                            echo '<h3>Welcome ' . $username . '</h3>';
+                            $numBus = $_SESSION['numBus'];
+                            echo '<h3>Welcome ' . $username;
                             ?></a></li>
                             <li><a></a></li>                    
                             <li><a href="home.php">Businesses</a></li> 
@@ -79,25 +80,6 @@ $statement = $gateway->getBusinessByUserId($username, $sortOrder);
             </nav> 
         </div>
         
-<!--        <div class = "row">
-            <div class="container">
-                <div class = "options-home col-md-6 col-xs-6">
-                    <center>
-                        <a href="home.php"><img src="img/companyFloat.png" onmouseover="this.src='img/company.png'" onmouseout="this.src='img/companyFloat.png'" /></a>
-                        <h4>Businesses</h4>
-                    </center>
-                    
-                </div>
-
-                <div class = "options-home col-md-6 col-xs-6">
-                    <center>
-                        <a href="viewDeals.php"><img src="img/deal.png" onmouseover="this.src='img/dealFloat.png'" onmouseout="this.src='img/deal.png'" /></a>
-                        <h4>Deals</h4>
-                    </center>
-                </div>
-            </div>
-        </div>-->
-        
         <div class = "row">
             <div class="welcome">
                 <div class="container">
@@ -107,26 +89,6 @@ $statement = $gateway->getBusinessByUserId($username, $sortOrder);
         </div>
 
         <div class="container">
-            <!--<div class="row">-->
-<!--                <div class="col-md-2">
-                    <form class="form-horizontal" role="form" action="home.php?sortOrder=<?php echo $sortOrder; ?>" method="GET">                      
-                        <div class="form-group">
-                            <label class="control-label" for="lName">First Name</label>
-                            <div>
-                                <input type="text"
-                                       name="filterName"
-                                       class="form-control"
-                                       value="<?php echo $filterName; ?>" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label"></label>
-                            <div>
-                                <button type="submit" name="filterBtn" id="filterBtn" class="btn btn-success">Filter</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>-->
             <div class="row">    
                 <div class="col-md-12">
                     <table class="table table-bordered table-striped table-responsive">           
@@ -156,6 +118,7 @@ $statement = $gateway->getBusinessByUserId($username, $sortOrder);
 
                                 $row = $statement->fetch(PDO::FETCH_ASSOC);
                             }
+                           
                             ?>
                         </tbody>
                     </table>

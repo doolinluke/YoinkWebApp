@@ -27,14 +27,5 @@ if(empty($errorMessage)){
     header('Location: home.php');
 }
 else{
-    require 'editBusinessForm.php';
-    /*echo '<pre>';
-    print_r($businessID);
-    print_r($business_name);
-    print_r($business_address);
-    print_r($business_lat);
-    
-    echo '</pre>';
-     * */
-     
+    require 'editBusinessForm.php';    
 }

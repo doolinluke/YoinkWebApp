@@ -5,9 +5,9 @@
         <title>My Website</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/custom.css" rel="stylesheet">
-        <script src="js/respond.js"></script>
+        <link href="CSS/bootstrap.min.css" rel="stylesheet">
+        <link href="CSS/custom.css" rel="stylesheet">
+        <script src="Javascript/respond.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
     </head>
     <body>
@@ -26,10 +26,6 @@
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
-<!--                            <li><a href="index.php">Home</a></li>                    
-                            <li><a href="#">Services</a></li> 
-                            <li><a href="#">Book</a></li>
-                            <li><a href="#">Contact</a></li>-->
                             <li class=""><?php require 'toolbar.php' ?></li>
                         </ul> 
                     </div>
@@ -45,8 +41,8 @@
         </div>
         <?php
         if (!isset($username)) {
-            $username = 'jim';
-            $password = 'jim';
+            $username = 'jude';
+            $password = 'jude';
         }
         ?>
         <div class="container">            
@@ -139,7 +135,7 @@
         </div>
         <!-- javascript -->
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="Javascript/bootstrap.min.js"></script>
         <script>
                                                $('a.btn-info').tooltip()
         </script>

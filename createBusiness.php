@@ -11,8 +11,6 @@ if ($id == "") {
 
 $userId = $_SESSION['user_id'];
 
-echo['business_lat'];
-
 require 'ensureUserLoggedIn.php';
 
 $connection = Connection::getInstance();
@@ -28,11 +26,8 @@ $business_type = filter_input(INPUT_POST, 'business_type', FILTER_SANITIZE_STRIN
 if ($userId == -1) {
     $userId = null;
 }
-/*if ($dealId == -1) {
-    $dealId = NULL;
-}*/
 
-//if statements to validate form, works with createEvent.php
+//if statements to validate form
 $errorMessage = array();
 if ($business_name === FALSE || $business_name === '') {
     $errorMessage['business_name'] = 'Business Name must not be blank<br/>';
