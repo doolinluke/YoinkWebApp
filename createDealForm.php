@@ -44,13 +44,6 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
         <script src="Javascript/respond.js"></script>
     </head>
     <body>
-        <!--<?php require 'toolbar.php' ?>-->
-        <?php require 'mainMenu.php' ?>
-        <?php
-        if (isset($errorMessage)) {
-            echo '<p>Error: ' . $errorMessage . '</p>';
-        }
-        ?> 
         <div class="row"> 
             <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
                 <div class="container">
@@ -66,10 +59,16 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
                     </div>
                     <div class="collapse navbar-collapse" id="collapse">
                         <ul class="nav navbar-nav navbar-right">
+                            <li><p><?php
+                            $username = $_SESSION['username'];
+                            $numBus = $_SESSION['numBus'];
+                            echo 'Welcome ' . $username;
+                            ?></p></li>
+                            <li><a></a></li>                    
                             <li><a href="home.php">Businesses</a></li> 
                             <li><a href="viewDeals.php">Deals</a></li>
                             <li class=""><?php require 'toolbar.php' ?></li>
-                        </ul>
+                        </ul> 
                     </div>
                 </div>
             </nav> 
@@ -88,7 +87,7 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
                         <tr>
                             <td>Deal Description</td>
                             <td>
-                                <input type="text" name="deal_description" value="<?php
+                                <input type="text" style="width: 190px;" name="deal_description" value="<?php
                                 if (isset($_POST) && isset($_POST['deal_description'])) {
                                     echo $_POST['deal_description'];
                                 }
@@ -106,7 +105,6 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
                             <td>Deal Category</td>
                             <td>
                                 <select name="deal_category">
-                                    <option value="-1">....</option>
                                     <option value="Café">Café</option>
                                     <option value="Clothes & Fashion">Clothes & Fashion</option>
                                     <option value="Electronics">Electronics</option>
@@ -136,7 +134,6 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
                             <td>Business</td>
                             <td>
                                 <select name="businessId">
-                                    <option value="-1">No Business</option>
                                     <?php
                                     $b = $businesses->fetch(PDO::FETCH_ASSOC);
                                     while ($b) {
@@ -150,7 +147,7 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
                         <tr>
                             <td></td>
                             <td>
-                                <input type="submit" class="btn btn-info" value="Submit">
+                                <input type="submit" id="createDealForm" class="btn btn-info" value="Submit">
                             </td>
                         </tr>
                     </tbody>
@@ -158,49 +155,16 @@ $businesses = $businessGateway->getBusinessByUserId($username, $sortOrder);
             </div>
         </form>
 
-        <div class = "row">
-            <div class="row3">
-                <div class = "bottom col-md-3 col-xs-6">
-                    <ul class="footer navbar-nav">
-                        <h3>FIND US HERE</h3>
-                        <li><img src="img/fbicon.png" onmouseover="this.src = 'img/fbiconfloat.png'" onmouseout="this.src = 'img/fbicon.png'" /></li>
-                        <li><img src="img/instaicon.png" onmouseover="this.src = 'img/instaiconfloat.png'" onmouseout="this.src = 'img/instaicon.png'" /></li>
-                        <li><img src="img/twittericon.png" onmouseover="this.src = 'img/twittericonfloat.png'" onmouseout="this.src = 'img/twittericon.png'" /></li>
-                    </ul>
-                </div>
-
-                <div class = "bottom col-md-3 col-xs-6">
-                    <h3>SEE OUR ENDORSEMENTS</h3>
-                    <p>Click here to read reviews from satisfied members as well as professional endorsements and testimonials from highly regarded medical professionals.</p>
-                </div>
-
-                <div class = "bottom col-md-3 col-xs-6">
-                    <h3>CONTACT US</h3>
-                    <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
-                    <p>84 Ranelagh Road, Ranelagh, D6</p>
-                    <p>Phone: 0871234567</p>
-                    <p>yoink@gmail.com</p>
-                </div>
-
-                <div class = "bottom col-md-3 col-xs-6">
-                    <h3>JOIN OUR MAILING LIST</h3>
-                    <p>Enter you email address to keep up to date with new membership offers.</p>
-                    <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
-                    <a class="btn btn-primary btn-large" href="#">Subscribe</a>
-                </div>
-            </div>
-        </div>
-
         <div class="row">
-            <div class = "footerBar col-md-12 col-xs-12">
+            <div class = "footerBar navbar-fixed-bottom col-md-12 col-xs-12">
                 <p>© YOINK! 2016. All rights reserved.</p>
             </div>
         </div>
         <!-- javascript -->
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="Javascript/bootstrap.min.js"></script>
         <script>
-                            $('a.btn-info').tooltip()
+            $('a.btn-info').tooltip();
         </script>
     </body>
 </html>

@@ -44,11 +44,16 @@ if ($businessId === FALSE || $businessId === '') {
 }
 
 //uses gateway to call insertDeal method and passes in variables
-$dealId = $gateway->insertDeal($deal_description, $deal_category, $businessId, $userId);
-$message = "New Deal Created";
-header("Location: viewDeals.php");
 
 
+if (empty($errorMessage)) {
+    $dealId = $gateway->insertDeal($deal_description, $deal_category, $businessId, $userId);
+    $message = "New Deal Created";
+    header("Location: viewDeals.php");
+}
+else {
+    require 'createDealForm.php';
+}
 
 
 

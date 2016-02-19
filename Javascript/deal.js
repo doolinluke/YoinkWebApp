@@ -7,14 +7,6 @@ window.onload = function () {
     {
         createDealForm.addEventListener('submit', validateDealForm);
     }
-    
-    /*function validateDealForm(event) {
-        var form = event.target;
-
-        if (!confirm("Is the form data correct?")) {
-            event.preventDefault();
-        }
-    }*/
 
     function validateDealForm(event) {
         var form = event.target;
@@ -34,10 +26,10 @@ window.onload = function () {
             errors["deal_description"] = "Please enter deal name.\n";
         }
         if (deal_category === "") {
-            errors["deal_category"] = "Please enter number of beds.\n";
+            errors["deal_category"] = "Please enter deal category\n";
         }
         if (business_name === "") {
-            errors["business_name"] = "Please enter head nurse\n";
+            errors["business_name"] = "Please enter Business name\n";
         }
 
         var valid = true;
@@ -75,5 +67,4 @@ window.onload = function () {
             event.preventDefault();
         }
     }
-
 };

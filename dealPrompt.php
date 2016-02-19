@@ -2,6 +2,7 @@
 require_once 'Business.php';
 require_once 'Connection.php';
 require_once 'BusinessTableGateway.php';
+require_once 'DealTableGateway.php';
 
 require 'ensureUserLoggedIn.php';
 $userId = $_SESSION['user_id'];
@@ -50,17 +51,17 @@ $userId = $_SESSION['user_id'];
                         </ul> 
                     </div>
                 </div>
-            </nav>
+            </nav> 
         </div>
         
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="img/chefs2.png" alt="">
+                    <img src="img/shopper2.png" alt="">
                     <div class="carousel-caption">
-                        <center><h1>Welcome To Yoink!</h1>
-                            <p>To get started with Yoink! click the button below to create your first business and then attach a deal to your business</p>  
-                            <a class="btn btn-primary btn-large" href="createBusinessForm.php">Create Business</a></center>
+                        <center><h1>Business Created</h1>
+                            <p>Now that you've created your first business click the button below to create your first deal.</p>  
+                            <a class="btn btn-primary btn-large" href="createDealForm.php">Create Deal</a></center>
                     </div>
                 </div>                               
             </div>

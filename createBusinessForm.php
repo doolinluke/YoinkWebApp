@@ -41,27 +41,32 @@ $businesses = $businessGateway->getBusinesses();
         <body>
             <div class="row"> 
                 <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
-                    <div class="container">
-                        <div class="navbar-brand">
-                            <p><a href="index.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
-                        </div>
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="glyphicon glyphicon-arrow-down"></span>
-                                MENU
-
-                            </button>
-                        </div>
-                        <div class="collapse navbar-collapse" id="collapse">
-                            <ul class="nav navbar-nav navbar-right">
-                                <li><a href="home.php">Businesses</a></li> 
-                                <li><a href="viewDeals.php">Deals</a></li>
-                                <li class=""><?php require 'toolbar.php' ?></li>
-                            </ul>
-                        </div>
+                <div class="container">
+                    <div class="navbar-brand">
+                        <p><a href="index.php"><img src="img/yoinklogosmall.png" alt="" class="img-responsive"></a></p>
                     </div>
-                </nav>
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="glyphicon glyphicon-arrow-down"></span>
+                            MENU
+                        </button>
+                    </div>
+                    <div class="collapse navbar-collapse" id="collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><p><?php
+                            $username = $_SESSION['username'];
+                            $numBus = $_SESSION['numBus'];
+                            echo 'Welcome ' . $username;
+                            ?></p></li>
+                            <li><a></a></li>                    
+                            <li><a href="home.php">Businesses</a></li> 
+                            <li><a href="viewDeals.php">Deals</a></li>
+                            <li class=""><?php require 'toolbar.php' ?></li>
+                        </ul> 
+                    </div>
+                </div>
+            </nav>
                 <div class = "row">
                     <div class="welcome">
                         <div class="container">
@@ -113,7 +118,7 @@ $businesses = $businessGateway->getBusinesses();
                             <tr>
                                 <td>Latitude</td>
                                 <td>
-                                    <input type="text" name="business_lat" id="lblresultLat" value="<?php
+                                    <input type="text" style="width: 300px;" name="business_lat" id="lblresultLat" value="<?php
                                     if (isset($_POST) && isset($_POST['business_lat'])) {
                                         echo $_POST['business_lat'];
                                     }
@@ -130,7 +135,7 @@ $businesses = $businessGateway->getBusinesses();
                             <tr>
                                 <td>Longitude</td>
                                 <td>
-                                    <input type="text" name="business_long" id="lblresultLng" value="<?php
+                                    <input type="text" style="width: 300px;" name="business_long" id="lblresultLng" value="<?php
                                     if (isset($_POST) && isset($_POST['business_long'])) {
                                         echo $_POST['business_long'];
                                     }
@@ -148,7 +153,6 @@ $businesses = $businessGateway->getBusinesses();
                                 <td>Business Type</td>
                                 <td>
                                     <select name="business_type">
-                                        <option value="-1">....</option>
                                         <option value="Café">Café</option>
                                         <option value="Clothes & Fashion">Clothes & Fashion</option>
                                         <option value="Electronics">Electronics</option>
@@ -177,8 +181,7 @@ $businesses = $businessGateway->getBusinesses();
                             <tr>
                                 <td></td>
                                 <td>
-
-                                    <input type="submit" class="btn btn-info" value="Submit">
+                                    <input type="submit" id="createBusinessForm" class="btn btn-info" value="Submit">
                                 </td>
                             </tr>
                         </tbody>
@@ -186,47 +189,14 @@ $businesses = $businessGateway->getBusinesses();
                 </div>
             </form>
 
-            <div class = "row">
-                <div class="row3">
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <ul class="footer navbar-nav">
-                            <h3>FIND US HERE</h3>
-                            <li><img src="img/fbicon.png" onmouseover="this.src = 'img/fbiconfloat.png'" onmouseout="this.src = 'img/fbicon.png'" /></li>
-                            <li><img src="img/instaicon.png" onmouseover="this.src = 'img/instaiconfloat.png'" onmouseout="this.src = 'img/instaicon.png'" /></li>
-                            <li><img src="img/twittericon.png" onmouseover="this.src = 'img/twittericonfloat.png'" onmouseout="this.src = 'img/twittericon.png'" /></li>
-                        </ul>
-                    </div>
-
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>SEE OUR ENDORSEMENTS</h3>
-                        <p>Click here to read reviews from satisfied members as well as professional endorsements and testimonials from highly regarded medical professionals.</p>
-                    </div>
-
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>CONTACT US</h3>
-                        <P>Feel free to get in touch. Either pop into us at our location, phone us, or you can email us.</P>
-                        <p>84 Ranelagh Road, Ranelagh, D6</p>
-                        <p>Phone: 0871234567</p>
-                        <p>yoink@gmail.com</p>
-                    </div>
-
-                    <div class = "bottom col-md-3 col-xs-6">
-                        <h3>JOIN OUR MAILING LIST</h3>
-                        <p>Enter you email address to keep up to date with new membership offers.</p>
-                        <input type="email" id="form_email" name="form[email]" required="required" placeholder="Enter your email address">
-                            <a class="btn btn-primary btn-large" href="#">Subscribe</a>
-                    </div>
-                </div>
-            </div>
-
             <div class="row">
-                <div class = "footerBar col-md-12 col-xs-12">
+                <div class = "footerBar navbar-fixed-bottom col-md-12 col-xs-12">
                     <p>© YOINK! 2016. All rights reserved.</p>
                 </div>
             </div>
             <!-- javascript -->
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
+        <script src="Javascript/bootstrap.min.js"></script>
         <script>
             $('a.btn-info').tooltip();
         </script>

@@ -58,7 +58,7 @@ body {
 
 .navbar-brand {
     color: #121c25;
-    margin-bottom: 100px;
+    margin-bottom: 34px;
     padding: 10px;
     margin-top: 0px
     
@@ -105,11 +105,11 @@ h4 {
 .bio p {
     font-family: 'Lato', sans-serif;
     font-size: 17px;
-    color: #dddddd;
+    color: #7c7c7c;
     font-weight: normal;
     text-align: center;
     margin-top: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 0px;
     letter-spacing: 1px;
 }
 
@@ -175,7 +175,8 @@ h4 {
     font-family: Lato, sans-serif;
     color: #969696;
     font-weight: bold;
-    letter-spacing: .5px
+    letter-spacing: .5px;
+    margin-top: 20px;
 }
 
 .tour a {
@@ -194,13 +195,14 @@ h4 {
 
 .tour p {
     font-size: 17px;
-    color: #dddddd;
+    color: #7c7c7c;
+    margin-top: 25px;
 }
 
 .options {
     font-family: Lato, sans-serif;
     color: #969696;
-    margin-top: 150px;
+    margin-top: 100px;
 }
 
 .options-home {
@@ -227,7 +229,7 @@ h4 {
 
 .bottom {
     background-color: #121c25;
-    min-height: 200px;
+    min-height: 100px;
     margin-top: 0px;
 }
 
@@ -289,6 +291,7 @@ h4 {
     color: #008080; 
     min-height: 40px;
     text-align: center;
+    margin-top: 100px;
 }
 
 .footerBar ul {
@@ -302,7 +305,14 @@ h4 {
     padding-right: 5px;
 }
 
-.nav navbar-nav navbar-right li {
+.nav navbar-nav navbar-right li a {
+    color: #3ca3ca; 
+    font-size: 15px;
+    -webkit-align-content: center;
+    align-content: center;
+}
+
+.nav navbar-nav navbar-right li p {
     color: #3ca3ca; 
     font-size: 15px;
 }
@@ -436,17 +446,23 @@ h4 {
     margin-top: 0px;
 }
 
+.nav li p {
+    font-size: 16px;
+    background-color: #121c25;
+    margin-top: 13px;
+}
+
 .table th a {
     color: #ddd;
 }
 .nav li a:hover {
     color: #008080;
-    background-color: #ddd;
+    background-color: #121c25;
 }
 
 .logIn h1 {
     font-family: 'Lato', sans-serif;
-    color: #dddddd;
+    color: #969696;
     font-size: 40px;
     margin-top: 170px;
     margin-bottom: 40px;
@@ -454,21 +470,29 @@ h4 {
 
 .register h1 {
     font-family: 'Lato', sans-serif;
-    color: #dddddd;
+    color: #969696;
     font-size: 40px;
     margin-top: 170px;
     margin-bottom: 40px;    
 }
 
+ul.nav {
+    margin-top: 15px;
+    background-color: #121c25;
+    color: #008080;
+    text-align: center;
+}
+
 ul.nav a {
     color: #68747e !important;
     margin-right: 10px;
-    margin-top: 15px;
+    background-color: #121c25;
 }
 
 ul.nav a:hover {
     color: #008080 !important;
     border: none;
+    background-color: #ddd;
 }
 
 ul.nav btn {
@@ -570,7 +594,7 @@ row3 {
     color: #fff;
 }
 
-.btn-logout {
+.btn btn-logout btn-md {
     background-color: #68747e;
     color: #008080; 
 }
@@ -615,4 +639,9 @@ row3 {
 .btn btn-primary btn-large {
     background-color: #008080;
     color: #008080;
+}
+
+.navbar-toggle {
+    color: #008080;
+    border-color: #008080;
 }

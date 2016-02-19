@@ -7,14 +7,6 @@ window.onload = function () {
     {
         createBusinessForm.addEventListener('submit', validateBusinessForm);
     }
-    
-//    function validateBusinessForm(event) {
-//        var form = event.target;
-//
-//        if (!confirm("Is the form data correct?")) {
-//            event.preventDefault();
-//        }
-//    }
 
     function validateBusinessForm(event) {
         var form = event.target;
@@ -83,5 +75,4 @@ window.onload = function () {
             event.preventDefault();
         }
     }
-
 };

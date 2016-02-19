@@ -21,11 +21,10 @@ $business_lat = filter_input(INPUT_POST, 'business_lat', FILTER_SANITIZE_STRING)
 $business_long = filter_input(INPUT_POST, 'business_long', FILTER_SANITIZE_STRING);
 $business_type = filter_input(INPUT_POST, 'business_type', FILTER_SANITIZE_STRING);
 
-if(empty($errorMessage)){
-    $gateway->updateBusiness($businessID, $business_name, $business_address, $business_lat, $business_long, $business_type);
 
+    $gateway->updateBusiness($businessID, $business_name, $business_address, $business_lat, $business_long, $business_type);
     header('Location: home.php');
-}
-else{
+
+
     require 'editBusinessForm.php';    
-}
+
