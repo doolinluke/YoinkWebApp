@@ -1,3 +1,4 @@
+<script type="text/javascript" src="Javascript/business.js"></script>
 <?php
 require_once 'Connection.php';
 require_once 'DealTableGateway.php';
@@ -28,7 +29,6 @@ $businesses = $businessGateway->getBusinesses();
     <head>
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>
         <meta charset="UTF-8">
-        <script type="text/javascript" src="Javascript/business.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3kPZdtcJcP3EuDFpPNU3iIfAh0q-X6Gc&libraries=places"></script>
         <title>Yoink!</title>
         <meta charset="utf-8">  
@@ -76,7 +76,7 @@ $businesses = $businessGateway->getBusinesses();
                 </div>
             </div>
                 
-            <form action="createBusiness.php" method="POST" id="createBusinessForm">
+            <form id="createBusinessForm" action="createBusiness.php" method="POST" >
                 <div class="container">
                     <table class="table table-bordered">                
                         <tbody>
@@ -88,7 +88,7 @@ $businesses = $businessGateway->getBusinesses();
                                         echo $_POST['business_name'];
                                     }
                                     ?>" />
-                                    <span id="fNameError" class="error">
+                                    <span id="businessNameError" class="error">
                                         <?php
                                         if (isset($errorMessage) && isset($errorMessage['business_name'])) {
                                             echo $errorMessage['business_name'];
@@ -106,7 +106,7 @@ $businesses = $businessGateway->getBusinesses();
                                         echo $_POST['business_address'];
                                     }
                                     ?>" />
-                                    <span id="fNameError" class="error">
+                                    <span id="addressError" class="error">
                                         <?php
                                         if (isset($errorMessage) && isset($errorMessage['business_address'])) {
                                             echo $errorMessage['business_address'];
@@ -123,7 +123,7 @@ $businesses = $businessGateway->getBusinesses();
                                         echo $_POST['business_lat'];
                                     }
                                     ?>" />
-                                    <span id="fNameError" class="error">
+                                    <span id="latitudeError" class="error">
                                         <?php
                                         if (isset($errorMessage) && isset($errorMessage['business_lat'])) {
                                             echo $errorMessage['business_lat'];
@@ -140,7 +140,7 @@ $businesses = $businessGateway->getBusinesses();
                                         echo $_POST['business_long'];
                                     }
                                     ?>" />
-                                    <span id="addressError" class="error">
+                                    <span id="longitudeError" class="error">
                                         <?php
                                         if (isset($errorMessage) && isset($errorMessage['business_long'])) {
                                             echo $errorMessage['business_long'];
@@ -168,7 +168,7 @@ $businesses = $businessGateway->getBusinesses();
                                             echo $_POST['business_type'];
                                         }
                                         ?>" />
-                                        <span id="dealCategoryError" class="error">
+                                        <span id="businessTypeError" class="error">
                                             <?php
                                             if (isset($errorMessage) && isset($errorMessage['dealCategoryError'])) {
                                                 echo $errorMessage['dealCategoryError'];
@@ -181,7 +181,7 @@ $businesses = $businessGateway->getBusinesses();
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="submit" id="createBusinessForm" class="btn btn-info" value="Submit">
+                                    <button type="submit" id="createBusinessForm" class="btn btn-info">Create </button>
                                 </td>
                             </tr>
                         </tbody>

@@ -92,21 +92,21 @@ $deals = $dealGateway->getDealByUserId($username);
                 </thead>
                 <tbody>
                     <?php
-                    $row = $deals->fetch(PDO::FETCH_ASSOC);
-                    while ($row) {
+                    $deal = $deals->fetch(PDO::FETCH_ASSOC);
+                    while ($deal) {
 
 
-                        echo '<td>' . $row['deal_description'] . '</td>';
-                        echo '<td>' . $row['deal_category'] . '</td>';
-                        echo '<td>' . $row['business_name'] . '</td>';
+                        echo '<td>' . $deal['deal_description'] . '</td>';
+                        echo '<td>' . $deal['deal_category'] . '</td>';
+                        echo '<td>' . $deal['business_name'] . '</td>';
                         echo '<td>'
-                        . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $row['dealId'] . '">View</a> '
-                        . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $row['dealId'] . '">Edit</a> '
-                        . '<a class="deleteBusiness" href="deleteDeal.php?id=' . $row['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
+                        . '<a class="btn btn-view btn-xs" href="viewDeal.php?id=' . $deal['dealId'] . '">View</a> '
+                        . '<a class="btn btn-edit btn-xs" href="editDealForm.php?id=' . $deal['dealId'] . '">Edit</a> '
+                        . '<a class="deleteDeal" href="deleteDeal.php?id=' . $deal['dealId'] . '"><button class = "btn btn-delete btn-xs">Delete</button></a> '
                         . '</td>';
                         echo '</tr>';
 
-                        $row = $deals->fetch(PDO::FETCH_ASSOC);
+                        $deal = $deals->fetch(PDO::FETCH_ASSOC);
                     }
                     ?>
                 </tbody>

@@ -52,12 +52,15 @@ if ($business_type === FALSE || $business_type === '') {
 }
 
 
-$deal = $dealGateway->getDealByUserId($uId);
-$row = $deal->fetch(PDO::FETCH_ASSOC);
+//$deal = $dealGateway->getDealByUserId($uId);
+//$row = $deal->fetch(PDO::FETCH_ASSOC);
 if (empty($errorMessage)) {
     $businessId = $gateway->insertBusiness($business_name, $business_address, $business_lat, $business_long, $business_type, $userId);
     $message = "New Business Created";
     header("Location: dealPrompt.php");
+}
+else {
+    require 'createBusinessForm.php';
 }
 
 

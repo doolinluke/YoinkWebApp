@@ -493,6 +493,7 @@ ul.nav a:hover {
     color: #008080 !important;
     border: none;
     background-color: #ddd;
+    border: none;
 }
 
 ul.nav btn {

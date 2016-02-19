@@ -123,7 +123,6 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                             <td>Deal Category</td>
                             <td>
                                 <select name="deal_category">
-                                    <option value="-1">....</option>
                                     <option value="Café">Café</option>
                                     <option value="Clothes & Fashion">Clothes & Fashion</option>
                                     <option value="Electronics">Electronics</option>
@@ -152,8 +151,12 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td>Business</td>
                             <td>
-                                <select name="businessId">
-                                    <option value="-1">No Business</option>
+                                <select name="businessId" value="<?php
+                                if (isset($_POST) && isset($_POST['business_name'])) {
+                                    echo $_POST['business_name'];
+                                } else
+                                    echo $row['business_name']
+                                    ?>">
                                     <?php
                                     $b = $businesses->fetch(PDO::FETCH_ASSOC);
                                     while ($b) {
@@ -167,7 +170,7 @@ $row = $statement->fetch(PDO::FETCH_ASSOC);
                         <tr>
                             <td></td>
                             <td>
-                                <input type="submit" value="Update Deal" name="updateDeal" />
+                                <input type="submit" id="editDealForm" value="Update Deal" name="updateDeal" />
                             </td>
                         </tr>
                     </tbody>

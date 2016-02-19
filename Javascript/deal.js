@@ -54,7 +54,7 @@ window.onload = function () {
     }
 
     //-------------------------------------------------------------------------
-    // define an event listener for any '.deleteProgrammer' links
+    // define an event listener for any '.deleteDeal' links
     //-------------------------------------------------------------------------
     var deleteLinks = document.getElementsByClassName('deleteDeal');
     for (var i = 0; i !== deleteLinks.length; i++) {

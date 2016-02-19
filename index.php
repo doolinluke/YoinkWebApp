@@ -145,7 +145,7 @@ require_once 'BusinessTableGateway.php';
                     <h1>About Us</h1>
                     <p>We here at Yoink! are passionate about improving the way businesses find new customers</p> 
                     <P>Join us for free to see how Yoink! can transform your customer base</p></p>
-                    <a class="btn btn-primary btn-large" href="#">Join Yoink!</a>
+                    <a class="btn btn-primary btn-large" href="register.php">Join Yoink!</a>
                 </div>
             </div>
         </div>

@@ -7,6 +7,12 @@ window.onload = function () {
     {
         createBusinessForm.addEventListener('submit', validateBusinessForm);
     }
+    
+    var createBusinessForm = document.getElementById('createBusinessForm');
+    if (createBusinessForm !== null) 
+    {
+        createBusinessForm.addEventListener('click', validateBusinessForm);
+    }
 
     function validateBusinessForm(event) {
         var form = event.target;

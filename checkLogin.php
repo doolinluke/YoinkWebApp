@@ -56,10 +56,13 @@ if (empty($errorMessage)) {
         }
     }
 }
+else {
+    require 'login.php';
+}
 
 /*User sent to home page if rowCount shows that they have created at least 1 business*/
 /*If user has not created their first business they are sent to welcome page*/
-$business = $businessGateway->getBusinessByUserId($row['id']);
+if (empty($errorMessage)) {$business = $businessGateway->getBusinessByUserId($row['id']);}
 if (empty($errorMessage) && $business->rowCount() > 0) {
     $_SESSION['username'] = $username;
     $_SESSION['user_id'] = $row['id'];
@@ -73,7 +76,7 @@ else if (empty($errorMessage) && $business->rowCount() < 1) {
     header("Location: welcome.php");
 }
 else {
-    require 'index.php';
+    require 'login.php';
 }
 
 

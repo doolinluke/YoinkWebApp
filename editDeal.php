@@ -16,13 +16,24 @@ require 'ensureUserLoggedIn.php';
 $connection = Connection::getInstance();
 $gateway = new DealTableGateway($connection);
 
-//$dealId = filter_input(INPUT_POST, 'dealId', FILTER_SANITIZE_NUMBER_INT);
 $deal_description = filter_input(INPUT_POST, 'deal_description', FILTER_SANITIZE_STRING);
 $deal_category = filter_input(INPUT_POST, 'deal_category', FILTER_SANITIZE_STRING);
 $businessId = filter_input(INPUT_POST, 'businessId', FILTER_SANITIZE_STRING);
-//$business_name = filter_input(INPUT_POST, '$business_name', FILTER_SANITIZE_STRING);
 if($dealId === -1) {
     $dealId = NULL;
+}
+
+$errorMessage = array();
+if ($deal_description === FALSE || $deal_description === '') {
+    $errorMessage['$deal_description'] = 'Deal Description must not be blank<br/>';
+}
+
+if ($deal_category === FALSE || $deal_category === '') {
+    $errorMessage['$deal_category'] = 'Category must not be blank<br/>';
+}
+
+if ($businessId === FALSE || $businessId === '') {
+    $errorMessage['$businessId'] = 'Business must not be blank<br/>';
 }
 
 $gateway->updateDeal($dealId, $deal_description, $deal_category, $businessId);
